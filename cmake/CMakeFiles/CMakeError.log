@@ -1,0 +1,53 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2212245546/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2212245546.dir/build.make CMakeFiles/cmTryCompileExec2212245546.dir/build
+gmake[1]: Entering directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2212245546.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2212245546.dir/CheckSymbolExists.c.o   -c /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec2212245546
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2212245546.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec2212245546.dir/CheckSymbolExists.c.o  -o cmTryCompileExec2212245546 -rdynamic 
+CMakeFiles/cmTryCompileExec2212245546.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xc): undefined reference to `pthread_create'
+collect2: ld returned 1 exit status
+gmake[1]: *** [cmTryCompileExec2212245546] Error 1
+gmake[1]: Leaving directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp'
+gmake: *** [cmTryCompileExec2212245546/fast] Error 2
+
+File /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2595876991/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2595876991.dir/build.make CMakeFiles/cmTryCompileExec2595876991.dir/build
+gmake[1]: Entering directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2595876991.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec2595876991.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2595876991
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2595876991.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec2595876991.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2595876991 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: ld returned 1 exit status
+gmake[1]: *** [cmTryCompileExec2595876991] Error 1
+gmake[1]: Leaving directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/cmake/CMakeFiles/CMakeTmp'
+gmake: *** [cmTryCompileExec2595876991/fast] Error 2
+
+

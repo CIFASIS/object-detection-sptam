@@ -1,0 +1,169 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_7b52a/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_7b52a.dir/build.make CMakeFiles/cmTC_7b52a.dir/build
+gmake[1]: Entering directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7b52a.dir/CheckSymbolExists.c.o
+/home/javier/.local/gcc-4.9.4/bin/gcc    -o CMakeFiles/cmTC_7b52a.dir/CheckSymbolExists.c.o   -c /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_7b52a
+/home/javier/.local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b52a.dir/link.txt --verbose=1
+/home/javier/.local/gcc-4.9.4/bin/gcc      -rdynamic CMakeFiles/cmTC_7b52a.dir/CheckSymbolExists.c.o  -o cmTC_7b52a 
+CMakeFiles/cmTC_7b52a.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_7b52a] Error 1
+gmake[1]: Leaving directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_7b52a/fast] Error 2
+
+File /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_54378/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_54378.dir/build.make CMakeFiles/cmTC_54378.dir/build
+gmake[1]: Entering directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_54378.dir/CheckFunctionExists.c.o
+/home/javier/.local/gcc-4.9.4/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_54378.dir/CheckFunctionExists.c.o   -c /home/javier/.local/share/cmake-3.8/Modules/CheckFunctionExists.c
+Linking C executable cmTC_54378
+/home/javier/.local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_54378.dir/link.txt --verbose=1
+/home/javier/.local/gcc-4.9.4/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_54378.dir/CheckFunctionExists.c.o  -o cmTC_54378 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_54378] Error 1
+gmake[1]: Leaving directory `/home/javier/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_54378/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_15325/fast"
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_15325.dir/build.make CMakeFiles/cmTC_15325.dir/build
+make[2]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_15325.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_15325.dir/CheckSymbolExists.c.o   -c /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_15325
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_15325.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_15325.dir/CheckSymbolExists.c.o  -o cmTC_15325 -rdynamic 
+CMakeFiles/cmTC_15325.dir/CheckSymbolExists.c.o: En la función `main':
+CheckSymbolExists.c:(.text+0x16): referencia a `pthread_create' sin definir
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_15325.dir/build.make:97: fallo en las instrucciones para el objetivo 'cmTC_15325'
+make[2]: *** [cmTC_15325] Error 1
+make[2]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_15325/fast'
+make[1]: *** [cmTC_15325/fast] Error 2
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+
+File /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d75a2/fast"
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_d75a2.dir/build.make CMakeFiles/cmTC_d75a2.dir/build
+make[2]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d75a2.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d75a2.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d75a2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d75a2.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d75a2.dir/CheckFunctionExists.c.o  -o cmTC_d75a2 -rdynamic -lpthreads 
+/usr/bin/ld: no se puede encontrar -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d75a2.dir/build.make:97: fallo en las instrucciones para el objetivo 'cmTC_d75a2'
+make[2]: *** [cmTC_d75a2] Error 1
+make[2]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_d75a2/fast'
+make[1]: *** [cmTC_d75a2/fast] Error 2
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9f28e/fast"
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_9f28e.dir/build.make CMakeFiles/cmTC_9f28e.dir/build
+make[2]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9f28e.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9f28e.dir/CheckSymbolExists.c.o   -c /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9f28e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9f28e.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9f28e.dir/CheckSymbolExists.c.o  -o cmTC_9f28e -rdynamic 
+CMakeFiles/cmTC_9f28e.dir/CheckSymbolExists.c.o: En la función `main':
+CheckSymbolExists.c:(.text+0x16): referencia a `pthread_create' sin definir
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9f28e.dir/build.make:97: fallo en las instrucciones para el objetivo 'cmTC_9f28e'
+make[2]: *** [cmTC_9f28e] Error 1
+make[2]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_9f28e/fast'
+make[1]: *** [cmTC_9f28e/fast] Error 2
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+
+File /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_fc406/fast"
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_fc406.dir/build.make CMakeFiles/cmTC_fc406.dir/build
+make[2]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fc406.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_fc406.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fc406
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc406.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_fc406.dir/CheckFunctionExists.c.o  -o cmTC_fc406 -rdynamic -lpthreads 
+/usr/bin/ld: no se puede encontrar -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fc406.dir/build.make:97: fallo en las instrucciones para el objetivo 'cmTC_fc406'
+make[2]: *** [cmTC_fc406] Error 1
+make[2]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_fc406/fast'
+make[1]: *** [cmTC_fc406/fast] Error 2
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/rcnn/py-faster-rcnn/caffe-fast-rcnn/CMakeFiles/CMakeTmp'
+
+
