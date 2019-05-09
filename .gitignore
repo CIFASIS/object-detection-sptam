@@ -47,6 +47,9 @@
 # PyCharm files
 .idea
 
+# Visual Studio Code files
+.vscode
+
 # OSX dir files
 .DS_Store
 
@@ -78,9 +81,10 @@ distribute/*
 python/caffe/proto/
 cmake_build
 .cmake_build
-
+.cmake
 # Generated documentation
 docs/_site
+docs/_includes
 docs/gathered
 _site
 doxygen
