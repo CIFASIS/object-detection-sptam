@@ -1,0 +1,10 @@
+int32 cls
+int32 x1
+int32 y1
+int32 x2
+int32 y2
+float32 yaw
+float32 dimX
+float32 dimY
+float32 dimZ
+
