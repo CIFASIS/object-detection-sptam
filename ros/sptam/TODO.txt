@@ -1,0 +1,47 @@
+TODOs primarios:
+- Hacer un covisibility graph (ver Double Window Optimization for constant time Visual SLAM)
+- Implementar el borrado de keyframes en el thread de mapping. Borrar todos los kf en los cuales mas del 90% de los puntos sean vistos por otros tres kfs. (Ver paper de ORB-SLAM)
+- Borrar los map points que no son vistos por mas de tres keyframes
+- Utiliar un mapa local para no tener que proyectar todos los puntos del mapa durante el tracking. Ver paper: ORB-SLAM: a Versatile and Accurate Monocular SLAM System)
+- agregar la odometria a g2o como una rescticcion mas entre los keyframes
+- Se tiene que sacar un hack de escala en el baseline en la funcion SaveCalibrationFromMsg de ros_node.cpp
+- Se puede setear una disparidad maxima para acotar el matching stereo para la creacion de puntos (Ver paper: Robust Selective Stereo SLAM without Loop Closure and Bundle Adjustment)
+- En vez de utilizar una ventana de busqueda de tamaño fijo se puede usar una elipse donde se considera el error del modelo de movimiento (ver paper Scalable Active Matching que estan las cuentas)
+- Utilizar OCTOMAP
+- Hay Un BUG para la heurística de creados de kf dado que no tiene en cuenta los kf que estan en cola
+- Tienen que haber tres locks: vector de punteros de MapPoints, MapPopints, vector de Keyframes
+- Los lugares donde hay sombra se sacan pocos features. Ver si se puede hacer adaptativa la extracción de features. Y que sea bien esparsa.
+- Pasar los parametros hardcodeados como (numero maximo de iteraciones de g2o, threshold bad measurement g2o).
+- Hacer que el BA Global corra en un tercer thread.
+- Implementar SUB-MAPPING
+- Probar usar FAST con Pyramid de OpenCV, aunque ORB hace esto
+- Hacer que el metodo de Gauss-Newton ande mucho mas rapido. Esto puede hacerse sin calcular siempre el jacobiano.
+
+TODOs secundarios:
+- Implementar relocalizacion comparando el frame actual con todos los keyframes. Se debe hacer una heurística de cuando se perdió el tracking para hacer relocalizacion.
+- Probar trackear los features entre frame y frame y guardar este hisorial de trackeo para luego hacer mas facil la busqueda de features entre keyframes.
+- Una posible mejora es hacer tracking 3D es decir crear una nube de puntos con el estero y buscar hacer matches 3D-3D con el mapa en vez de 3D-2D. De esta manera se estaria usando mas la camara stereo.
+- Hacer que los paramtros de FeatureDetector del archivo de configuracion no se pasen como string sino como cv::FileNode.
+
+OBSERVACIONES:
+- Cuando se utiliza la visualizacion con PCL durante el StandAlone anda mas lento porque se tiene que pedir el lock de los puntos del mapa para poder mostrarlo.
+- Se utiliza la orientacion desde la que es vista cada MapPoint para descartar dichos puntos cuando son vistos desde una orientacion muy distinta desde la que fueron creados.
+- El tracking crece linealmente conrespecto a la cantidad de puntos visibles.
+- Cuando el Numero de puntos visibles (que estan dentro del Frustum) es grande la funcion FindMatches es cara.
+- Es menester que converja el BA durante la corrida real-time porque sino los puntos tienen mucha innovación y trackea cualquier cosa.
+- el dataset de kitti 00 tiene un error de ground-truth de hasta 10cm esta puede ser la causa de por qué no esta andando excelente la prediccion con el ground-truth
+- En los lugares de mucha sombra se pierde, es decir, donde hay poco contraste. En los lugares donde hay sombra se sacan pocos features.
+- la ventana de busqueda de los puntos proyectados (active matching) tiene que ser grande para soportar fuertes cambios de rotacion ( cada celda 30 pixeles, 120x120 pixeles es el area de busqueda para kitti)
+- El plano lejano del frustum ( si bien se calcula en frustumCulling.cpp) no se utiliza para filtrar los puntos.
+- no se visualizan los puntos lejanos en el visualizador pero si mantenerlos en el mapa ya que son buenos para la rotacion
+- Para calcular el FOV estoy utilizando una forma que no utiliza la informacion del tamaño del CCD
+- El threshold que influyen a la hora de generar mayor cantidad de matches es EpipolarDistance, MatchingDistance. Tambien influye el threshold (ResponseThreshold) que se le da al detector de feature (STAR, FAST) para que extraiga puntos.
+- Siempre se borran las mediciones marcadas por el BA Local (cuando llega al max de iteraciones o cuando converge). Mientras que se borran las mediciones marcadas por el BA global solo cuando este converge, dado que sino las mediciones quedan marcadas como todas malas.
+
+FRUSTUM CULLING
+-Se utiliza la pose de la cámara en el mundo y no la rotacion y translacion que transforma puntos en el sistema de coordenadas del mundo a puntos en el sistema de coordenadas de la camara.
+
+
+
+
+

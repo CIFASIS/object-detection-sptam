@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+
+  <name>ros_utils</name>
+  <version>0.0.1</version>
+  <description>Some useful nodes to work with ROS</description>
+
+  <maintainer email="tfischer@dc.uba.ar">Thomas Fischer</maintainer>
+
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>cmake_modules</run_depend>
+
+
+  <export>
+  </export>
+
+</package>
