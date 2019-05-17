@@ -1,0 +1,165 @@
+Performing C SOURCE FILE Test HAVE_FPSETPREC failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ef1a1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ef1a1.dir/build.make CMakeFiles/cmTC_ef1a1.dir/build
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ef1a1.dir/src.c.o
+/usr/bin/cc    -fmessage-length=0 -fmax-errors=50  -fopenmp -DHAVE_FPSETPREC   -o CMakeFiles/cmTC_ef1a1.dir/src.c.o   -c /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:4:30: fatal error: machine/ieeefp.h: No existe el archivo o el directorio
+compilation terminated.
+CMakeFiles/cmTC_ef1a1.dir/build.make:65: fallo en las instrucciones para el objetivo 'CMakeFiles/cmTC_ef1a1.dir/src.c.o'
+make[1]: *** [CMakeFiles/cmTC_ef1a1.dir/src.c.o] Error 1
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_ef1a1/fast'
+make: *** [cmTC_ef1a1/fast] Error 2
+
+Return value: 1
+Source file was:
+
+  #include <stdio.h>
+  #include <string.h>
+  #include <machine/ieeefp.h>
+ 
+  double div (double a, double b) {
+    fp_prec_t fpu_oldprec;
+    volatile double result;
+ 
+    fpu_oldprec = fpgetprec();
+    fpsetprec(FP_PD);
+    result = a / b;
+    fpsetprec(fpu_oldprec);
+    return result;
+  }
+ 
+  int main (int argc, char **argv) {
+    double d = div (2877.0, 1000000.0);
+    char buf[255];
+    sprintf(buf, "%.30f", d);
+    // see if the result is actually in double precision
+    return strncmp(buf, "0.00287699", 10) == 0 ? 0 : 1;
+  }
+ 
+Performing C SOURCE FILE Test HAVE__CONTROLFP failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_11d37/fast"
+/usr/bin/make -f CMakeFiles/cmTC_11d37.dir/build.make CMakeFiles/cmTC_11d37.dir/build
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_11d37.dir/src.c.o
+/usr/bin/cc    -fmessage-length=0 -fmax-errors=50  -fopenmp -DHAVE__CONTROLFP   -o CMakeFiles/cmTC_11d37.dir/src.c.o   -c /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c: In function ‘div’:
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:10:17: warning: implicit declaration of function ‘_controlfp’ [-Wimplicit-function-declaration]
+     fpu_oldcw = _controlfp(0, 0);
+                 ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:11:16: error: ‘_PC_53’ undeclared (first use in this function)
+     _controlfp(_PC_53, _MCW_PC);
+                ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:11:16: note: each undeclared identifier is reported only once for each function it appears in
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:11:24: error: ‘_MCW_PC’ undeclared (first use in this function)
+     _controlfp(_PC_53, _MCW_PC);
+                        ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:19:7: error: invalid preprocessing directive #not
+     # not available on x64 platforms
+       ^
+CMakeFiles/cmTC_11d37.dir/build.make:65: fallo en las instrucciones para el objetivo 'CMakeFiles/cmTC_11d37.dir/src.c.o'
+make[1]: *** [CMakeFiles/cmTC_11d37.dir/src.c.o] Error 1
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_11d37/fast'
+make: *** [cmTC_11d37/fast] Error 2
+
+Return value: 1
+Source file was:
+
+  #include <stdio.h>
+  #include <string.h>
+  #include <float.h>
+ 
+  double div (double a, double b) {
+    unsigned int fpu_oldcw;
+    volatile double result;
+ 
+    fpu_oldcw = _controlfp(0, 0);
+    _controlfp(_PC_53, _MCW_PC);
+    result = a / b;
+    _controlfp(fpu_oldcw, _MCW_PC);
+    return result;
+  }
+ 
+  int main (int argc, char **argv) {
+    
+    # not available on x64 platforms
+    #if defined(_MSC_VER) && defined(_WIN64 )
+        return 1;
+    #else
+    
+    double d = div (2877.0, 1000000.0);
+    char buf[255];
+    sprintf(buf, "%.30f", d);
+    // see if the result is actually in double precision
+    return strncmp(buf, "0.00287699", 10) == 0 ? 0 : 1;
+	#endif
+  }
+ 
+Performing C SOURCE FILE Test HAVE__CONTROLFP_S failed with the following output:
+Change Dir: /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_be61d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_be61d.dir/build.make CMakeFiles/cmTC_be61d.dir/build
+make[1]: se entra en el directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_be61d.dir/src.c.o
+/usr/bin/cc    -fmessage-length=0 -fmax-errors=50  -fopenmp -DHAVE__CONTROLFP_S   -o CMakeFiles/cmTC_be61d.dir/src.c.o   -c /home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c: In function ‘div’:
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:10:5: warning: implicit declaration of function ‘_controlfp_s’ [-Wimplicit-function-declaration]
+     _controlfp_s(&fpu_cw, 0, 0);
+     ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:12:27: error: ‘_PC_53’ undeclared (first use in this function)
+     _controlfp_s(&fpu_cw, _PC_53, _MCW_PC);
+                           ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:12:27: note: each undeclared identifier is reported only once for each function it appears in
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:12:35: error: ‘_MCW_PC’ undeclared (first use in this function)
+     _controlfp_s(&fpu_cw, _PC_53, _MCW_PC);
+                                   ^
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp/src.c:19:7: error: invalid preprocessing directive #not
+     # not available on x64 platforms
+       ^
+CMakeFiles/cmTC_be61d.dir/build.make:65: fallo en las instrucciones para el objetivo 'CMakeFiles/cmTC_be61d.dir/src.c.o'
+make[1]: *** [CMakeFiles/cmTC_be61d.dir/src.c.o] Error 1
+make[1]: se sale del directorio '/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/CMakeFiles/CMakeTmp'
+Makefile:126: fallo en las instrucciones para el objetivo 'cmTC_be61d/fast'
+make: *** [cmTC_be61d/fast] Error 2
+
+Return value: 1
+Source file was:
+
+  #include <stdio.h>
+  #include <string.h>
+  #include <float.h>
+ 
+  double div (double a, double b) {
+    unsigned int fpu_oldcw, fpu_cw;
+    volatile double result;
+ 
+    _controlfp_s(&fpu_cw, 0, 0);
+    fpu_oldcw = fpu_cw;
+    _controlfp_s(&fpu_cw, _PC_53, _MCW_PC);
+    result = a / b;
+    _controlfp_s(&fpu_cw, fpu_oldcw, _MCW_PC);
+    return result;
+  }
+ 
+  int main (int argc, char **argv) {
+    # not available on x64 platforms
+    #if defined(_MSC_VER) && defined(_WIN64 )
+        return 1;
+    #else
+    double d = div (2877.0, 1000000.0);
+    char buf[255];
+    sprintf(buf, "%.30f", d);
+    // see if the result is actually in double precision
+    return strncmp(buf, "0.00287699", 10) == 0 ? 0 : 1;
+    #endif
+  }
+ 
