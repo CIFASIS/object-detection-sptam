@@ -1,1 +1,0 @@
-cmd='/usr/bin/cmake;-DCMAKE_CXX_COMPILER=/usr/bin/c++;-DCMAKE_CXX_FLAGS=-std=c++11 -fmax-errors=50 -Werror=return-type;-GUnix Makefiles;/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/src/meta'
