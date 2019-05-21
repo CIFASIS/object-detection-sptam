@@ -31,11 +31,11 @@ copiar o moverlos para que funcione.
 Agregar a las variables de entorno el contenido de install o moverlos/copiarlos a directorios de sistema.
 Para copiarlos
 
-    cp install/lib/* /usr/local/lib 
-    cp -Rf install/include/ /usr/local/include
+    sudo cp install/lib/* /usr/local/lib 
+    sudo cp -Rf install/include/ /usr/local/include
     cp install/python/caffe ./local/local/lib/python2.7/site-packages/
-    cp install/bin/* /usr/local/bin
-    cp -Rf install/share/Caffe /usr/local/share 
+    sudo cp install/bin/* /usr/local/bin
+    sudo cp -Rf install/share/Caffe /usr/local/share 
     
  
  **py-faster-rcnn**
