@@ -28,6 +28,8 @@ copiar o moverlos para que funcione.
     make -j4 && make pycaffe
     make install
 
+Agregar a las variables de entorno el contenido de install o moverlos/copiarlos a directorios de sistema.
+Para copiarlos
 
     cp install/lib/* /usr/local/lib 
     cp -Rf install/include/ /usr/local/include
