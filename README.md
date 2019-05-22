@@ -61,7 +61,37 @@ Para copiarlos
     cd lib
     make
  
- **dependencies **
+**dependencies**
+Dependencias de sptam
+
+**SuiteSparse**
+    
+    sudo apt-get install libsuitesparse-dev
+
+  **g2o** 
+
+    mkdir build && cd build
+    cmake ..
+    make 
+    sudo make install
+    
+**meta**
+    
+    sudo cp -Rf /ondeloc/dependencies/meta/include/meta /usr/include/
+
+**pugixml** 
+    
+    cd ~/ondeloc/dependencies/pugixml
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install/local
+ 
+ 
+
+
+    
  
  
  
