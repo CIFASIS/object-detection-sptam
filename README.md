@@ -21,6 +21,21 @@ copiar o moverlos para que funcione.
 
 **caffe-fast-rcnn**
 
+*dependencia general Ubuntu 16.01*
+
+    sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+    sudo apt-get install --no-install-recommends libboost-all-dev
+    
+***Blas***
+ 
+ **ATLAS**:
+ 
+    apt-get install libatlas-base-dev
+ 
+ **OpenBlas**:
+ 
+    apt-get install libopenblas-dev
+ 
     cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
     mkdir build
     cd build
