@@ -25,16 +25,15 @@ copiar o moverlos para que funcione.
 
     sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
     sudo apt-get install --no-install-recommends libboost-all-dev
+    sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
     
-***Blas***
+**Blas**
  
  **ATLAS**:
  
     apt-get install libatlas-base-dev
  
- **OpenBlas**:
- 
-    apt-get install libopenblas-dev
+ **caffe**
  
     cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
     mkdir build
@@ -42,13 +41,17 @@ copiar o moverlos para que funcione.
     cmake ..
     make -j4 && make pycaffe
     make install
+    
 
-Agregar a las variables de entorno el contenido de install o moverlos/copiarlos a directorios de sistema.
+Agregar a las variables de entorno el contenido de install  
+
+
+ó moverlos/copiarlos a directorios de sistema.
 Para copiarlos
 
     sudo cp install/lib/* /usr/local/lib 
     sudo cp -Rf install/include/ /usr/local/include
-    cp install/python/caffe ./local/local/lib/python2.7/site-packages/
+    cp install/python/caffe ./local/lib/python2.7/site-packages/
     sudo cp install/bin/* /usr/local/bin
     sudo cp -Rf install/share/Caffe /usr/local/share 
     
