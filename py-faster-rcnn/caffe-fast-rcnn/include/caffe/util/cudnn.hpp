@@ -41,8 +41,8 @@ inline const char* cudnnGetErrorString(cudnnStatus_t status) {
       return "CUDNN_STATUS_NOT_SUPPORTED";
     case CUDNN_STATUS_LICENSE_ERROR:
       return "CUDNN_STATUS_LICENSE_ERROR";
-// for cudnn 7.1.5
-#if CUDNN_VERSION_MIN(7,1,5) 
+// for cudnn 7.1.4
+#if CUDNN_VERSION_MIN(7,1,4) 
     case CUDNN_STATUS_RUNTIME_IN_PROGRESS:
         return "CUDNN_STATUS_RUNTIME_IN_PROGRESS";
     case CUDNN_STATUS_RUNTIME_FP_OVERFLOW:
