@@ -90,13 +90,13 @@ Dependencias de sptam
     
 **ApproxMVBB**
  
-  cd ~/ondeloc/dependencies/
-  source runme.sh 
-  mkdir build
-  cd build 
-  cmake ..
-  make all
-  sudo make install
+    cd ~/ondeloc/dependencies/
+    source runme.sh 
+    mkdir build
+    cd build 
+    cmake ..
+    make all
+    sudo make install
   
 
  
