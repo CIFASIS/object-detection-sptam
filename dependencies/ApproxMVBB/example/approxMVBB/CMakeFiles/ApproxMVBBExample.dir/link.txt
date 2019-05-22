@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11 -fmax-errors=50 -Werror=return-type  -fopenmp -O3 -DNDEBUG   CMakeFiles/ApproxMVBBExample.dir/src/main.cpp.o  -o ApproxMVBBExample -rdynamic ../../lib/libApproxMVBB.so.2.0.1 /usr/local/lib/libpugixml.a -Wl,-rpath,/home/taihu/Documentos/jcorti_bkp/ApproxMVBB2/ApproxMVBB/lib 
