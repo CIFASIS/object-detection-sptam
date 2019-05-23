@@ -16,7 +16,7 @@ que está en el directio models_tained:
     
 copiar o moverlos para que funcione.    
 
-    cp -Rf /data/ondeloc/models_trained/* /home/erica/.local/lib/python2.7/models/
+    cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
 
 
     
