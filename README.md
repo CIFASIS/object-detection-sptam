@@ -15,6 +15,10 @@ que está en el directio models_tained:
     models_tained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
     
 copiar o moverlos para que funcione.    
+
+    cp -Rf /data/ondeloc/models_trained/* /home/erica/.local/lib/python2.7/models/
+
+
     
     
 *COMPILACIÓN*
@@ -42,25 +46,28 @@ copiar o moverlos para que funcione.
     make -j4 && make pycaffe
     make install
     
-
-Agregar a las variables de entorno el contenido de install  
-
-
-ó moverlos/copiarlos a directorios de sistema.
-Para copiarlos
-
-    sudo cp install/lib/* /usr/local/lib 
-    sudo cp -Rf install/include/ /usr/local/include
-    cp install/python/caffe ./local/lib/python2.7/site-packages/
-    sudo cp install/bin/* /usr/local/bin
-    sudo cp -Rf install/share/Caffe /usr/local/share 
-    
- 
  **py-faster-rcnn**
  
     cd lib
     make
  
+ 
+
+
+Agregar 
+
+    pip install --user easydict
+    pip install --user skimage
+    ln -s /data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
+    ln -s /data/ondeloc/py-faster-rcnn/lib/fast_rcnn fast_rcnn
+    ln -s /data/ondeloc/py-faster-rcnn/lib/utils utils
+    ln -s /data/ondeloc/py-faster-rcnn/lib/nms nms
+    ln -s /data/ondeloc/py-faster-rcnn/lib/rpn rpn
+
+
+    
+ 
+
 **dependencies**
 Dependencias de sptam
 
@@ -103,16 +110,7 @@ Dependencias de sptam
     sudo make install
   
 
- 
-Add 
 
-
-  export PYTHONPATH=$PYTHONPATH:/data/ondeloc/py-faster-rcnn/lib:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/lib
-    :/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe
-
-  export PATH=$PATH:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/bin
-
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/include
 
 
     
