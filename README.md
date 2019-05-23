@@ -106,7 +106,13 @@ Dependencias de sptam
  
 Add 
 
-export PYTHONPATH=$PYTHONPATH:~/ondeloc/py-faster-rcnn/lib
+
+  export PYTHONPATH=$PYTHONPATH:/data/ondeloc/py-faster-rcnn/lib:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/lib
+    :/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe
+
+  export PATH=$PATH:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/bin
+
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/include
 
 
     
