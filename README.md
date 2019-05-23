@@ -104,7 +104,9 @@ Dependencias de sptam
   
 
  
- 
+Add 
+
+export PYTHONPATH=$PYTHONPATH:~/ondeloc/py-faster-rcnn/lib
 
 
     
