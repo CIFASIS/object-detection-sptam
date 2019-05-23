@@ -58,6 +58,7 @@ Agregar
 
     pip install --user easydict
     pip install --user skimage
+    cd ~/.local/lib/python2.7/site-packages
     ln -s ~/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
     ln -s ~/ondeloc/py-faster-rcnn/lib/fast_rcnn fast_rcnn
     ln -s ~/ondeloc/py-faster-rcnn/lib/utils utils
