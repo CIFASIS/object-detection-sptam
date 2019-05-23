@@ -69,7 +69,10 @@ Dependencias de sptam
     sudo apt-get install libsuitesparse-dev
 
   **g2o** 
-
+    
+    cd  ~/ondeloc/dependencies/
+    source getG2o.sh
+    cd ~/ondeloc/dependencies/g2o
     mkdir build && cd build
     cmake ..
     make 
@@ -77,7 +80,7 @@ Dependencias de sptam
     
 **meta**
     
-    sudo cp -Rf /ondeloc/dependencies/meta/include/meta /usr/include/
+    sudo cp -Rf ~/ondeloc/dependencies/meta/include/meta /usr/include/
 
 **pugixml** 
     
@@ -91,7 +94,8 @@ Dependencias de sptam
 **ApproxMVBB**
  
     cd ~/ondeloc/dependencies/
-    source runme.sh 
+    source getApproxMVBB.sh 
+    cd  ~/ondeloc/dependencies/ApproxMVBB
     mkdir build
     cd build 
     cmake ..
