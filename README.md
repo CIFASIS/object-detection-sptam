@@ -58,11 +58,11 @@ Agregar
 
     pip install --user easydict
     pip install --user skimage
-    ln -s /data/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
-    ln -s /data/ondeloc/py-faster-rcnn/lib/fast_rcnn fast_rcnn
-    ln -s /data/ondeloc/py-faster-rcnn/lib/utils utils
-    ln -s /data/ondeloc/py-faster-rcnn/lib/nms nms
-    ln -s /data/ondeloc/py-faster-rcnn/lib/rpn rpn
+    ln -s ~/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
+    ln -s ~/ondeloc/py-faster-rcnn/lib/fast_rcnn fast_rcnn
+    ln -s ~/ondeloc/py-faster-rcnn/lib/utils utils
+    ln -s ~/ondeloc/py-faster-rcnn/lib/nms nms
+    ln -s ~/ondeloc/py-faster-rcnn/lib/rpn rpn
 
 
     
