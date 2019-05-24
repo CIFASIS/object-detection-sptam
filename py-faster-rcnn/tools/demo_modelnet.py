@@ -25,16 +25,12 @@ import caffe, os, sys, cv2
 import argparse
 
 CLASSES = ('__background__',
-           'aeroplane', 'bicycle', 'bird', 'boat',
-           'bottle', 'bus', 'car', 'cat', 'chair',
-           'cow', 'diningtable', 'dog', 'horse',
-           'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor')
+           'bathtub', 'bed', 'chair', 'desk',
+           'dresser', 'monitor', 'night_stand', 'sofa', 'table',
+           'toilet')
 
 NETS = {'vgg16': ('VGG16',
-                  'VGG16_faster_rcnn_final.caffemodel'),
-        'zf': ('ZF',
-                  'ZF_faster_rcnn_final.caffemodel')}
+                  'roomgen15k_voc_120000.caffemodel')}
 
 
 def vis_detections(im, class_name, dets, thresh=0.5):
@@ -73,7 +69,9 @@ def demo(net, image_name):
     """Detect object classes in an image using pre-computed object proposals."""
 
     # Load the demo image
-    im_file = os.path.join(cfg.DATA_DIR, 'demo', image_name)
+    ##im_file = os.path.join(cfg.DATA_DIR, 'modelnet_demo','room1k', image_name)
+    im_file = os.path.join(cfg.DATA_DIR, 'modelnet_demo', image_name)
+    ##im_file = os.path.join(cfg.DATA_DIR, 'modelnet_devkit', 'data','Images',image_name)
     im = cv2.imread(im_file)
 
     # Detect all object classes and regress object bounds
@@ -85,7 +83,7 @@ def demo(net, image_name):
            '{:d} object proposals').format(timer.total_time, boxes.shape[0])
 
     # Visualize detections for each class
-    CONF_THRESH = 0.8
+    CONF_THRESH = 0.7
     NMS_THRESH = 0.3
     for cls_ind, cls in enumerate(CLASSES[1:]):
         cls_ind += 1 # because we skipped background
@@ -117,8 +115,8 @@ if __name__ == '__main__':
 
     args = parse_args()
 
-    prototxt = os.path.join(cfg.MODELS_DIR,'pascal_voc',NETS[args.demo_net][0],
-                            'faster_rcnn_alt_opt', 'faster_rcnn_test.pt')
+    prototxt = os.path.join(cfg.MODELS_DIR, 'modelnet', NETS[args.demo_net][0],
+                            'faster_rcnn_end2end', 'test.prototxt')
     caffemodel = os.path.join(cfg.DATA_DIR, 'faster_rcnn_models',
                               NETS[args.demo_net][1])
 
@@ -141,12 +139,21 @@ if __name__ == '__main__':
     for i in xrange(2):
         _, _= im_detect(net, im)
 
-    im_names = ['000456.jpg', '000542.jpg', '001150.jpg',
-                '001763.jpg', '004545.jpg']
+    im_names_real = ['real01.jpg','real02.jpg','real03.jpg','real04.jpg','real05.jpg','real06.jpg','real07.jpg','real08.jpg','real09.jpg','real10.jpg','real11.jpg','real12.jpg','real13.jpg','real14.jpg','real15.jpg','real16.jpg','real17.jpg','real18.jpg','real19.jpg','real20.jpg','real21.jpg','real22.jpg','real23.jpg','real24.jpg','real25.jpg','real26.jpg']
+    im_names_gen = ['p277_1_0.jpg','p274_1_0.jpg','t69_1_0.jpg','t71_1_0.jpg','t92_1_0.jpg','t82_1_0.jpg','t83_1_0.jpg','t116_1_0.jpg','t114_1_0.jpg','t113_1_0.jpg','t94_1_0.jpg','t89_1_0.jpg','t76_1_0.jpg','t74_1_0.jpg','t48_1_0.jpg','t33_1_0.jpg']
+    im_names_room = ['v1_1_0.jpg','v2_1_0.jpg','v3_1_0.jpg','v4_1_0.jpg','v5_1_0.jpg','v6_1_0.jpg','v7_1_0.jpg','v8_1_0.jpg','v9_1_0.jpg','v10_1_0.jpg','v11_1_0.jpg','v12_1_0.jpg','v14_1_0.jpg','v117_1_0.jpg']
+    im_names = im_names_real
     for im_name in im_names:
         print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
         print 'Demo for data/demo/{}'.format(im_name)
         demo(net, im_name)
 
-    plt.show()
+    ## plt.show()
+    from matplotlib.backends.backend_pdf import PdfPages
+    pp = PdfPages('/home/javier/rcnn/py-faster-rcnn/output/demo/multi.pdf')
+    for i in plt.get_fignums():
+	plt.figure(i)
+	pp.savefig()
+        #plt.savefig('/home/javier/rcnn/py-faster-rcnn/output/demo/figure%d.png' % i)
+    pp.close()
 
