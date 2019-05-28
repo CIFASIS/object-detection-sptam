@@ -64,6 +64,11 @@ Agregar
     ln -s ~/ondeloc/py-faster-rcnn/lib/utils utils
     ln -s ~/ondeloc/py-faster-rcnn/lib/nms nms
     ln -s ~/ondeloc/py-faster-rcnn/lib/rpn rpn
+    ln -s ~/ondeloc/py-faster-rcnn/lib/datasets datasets
+    ln -s ~/ondeloc/py-faster-rcnn/lib/roi_data_layer roi_data_layer
+    ln -s ~/ondeloc/py-faster-rcnn/lib/pycocotools pycocotools
+    ln -s ~/ondeloc/py-faster-rcnn/lib/transform transform
+
 
 
     
