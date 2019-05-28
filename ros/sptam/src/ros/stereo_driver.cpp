@@ -355,6 +355,7 @@ void sptam::stereo_driver::onDetection(const dl_node::DetectionWithPoseListConst
                 (detections_left->data[i].y2 >= projection.y) &&
                 (sMapPoint->IsBad() == false)) 
             {
+                ROS_INFO("en el if");
                 filtered_points.push_back( sMapPoint );
                 //filtered_set.insert(sMapPoint) ;
                 kf_counter++ ;
