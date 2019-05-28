@@ -319,7 +319,7 @@ void sptam::stereo_driver::onDetection(const dl_node::DetectionWithPoseListConst
         Eigen::Vector3d faceCorrection = sDetection->GetFaceCorrection(objAngle,objDim) ;
         
         //Camera bbox_cam = sDetection->GetBBoxCamera(up_kf_from_kf_frame,*cameraParametersLeft_) ;
-        ROS_INFO("salí de la función GetFaceCorrection");
+        
         
         
         size_t kf_counter = 0 ;
@@ -344,7 +344,7 @@ void sptam::stereo_driver::onDetection(const dl_node::DetectionWithPoseListConst
             
             const MapPoint& mapPoint = *sMapPoint ;
             const Eigen::Vector3d& point = mapPoint.GetPosition();
-            
+            ROS_INFO('Antes del if')
             // kf_counter
             //if (kf_cam.CanView(point)) {
             cv::Point2d projection = project( sDetection->GetSrcCamera().GetProjection(), eigen2cv( point ) );
