@@ -96,6 +96,8 @@ __C.TRAIN.PROPOSAL_METHOD = 'selective_search'
 # on zero-padding.
 __C.TRAIN.ASPECT_GROUPING = True
 
+# Use POSE
+__C.TRAIN.HAS_POSE=False
 # Use RPN to detect objects
 __C.TRAIN.HAS_RPN = False
 # IOU >= thresh: positive example
@@ -148,6 +150,9 @@ __C.TEST.SVM = False
 # Test using bounding-box regressors
 __C.TEST.BBOX_REG = True
 
+##
+__C.TEST.HAS_POSE=False
+
 # Propose boxes
 __C.TEST.HAS_RPN = False
 
@@ -180,6 +185,21 @@ __C.DEDUP_BOXES = 1./16.
 # they were trained with
 __C.PIXEL_MEANS = np.array([[[102.9801, 115.9465, 122.7717]]])
 
+###HAS POSE
+__C.SIZE_MEANS = ((  0.0,   0.0,   0.0),
+                 (0.911, 1.647, 0.594),
+                 (1.675, 2.176, 0.996),
+                 (0.568, 0.610, 0.900),
+                 (0.862, 1.610, 0.822),
+                 (0.526, 0.928, 1.032),
+                 (0.193, 0.521, 0.434),
+                 (0.455, 0.556, 0.595),
+                 (1.268, 2.534, 0.837),
+                 (0.969, 1.692, 0.662),
+                 (0.422, 0.675, 0.684))
+
+
+
 # For reproducibility
 __C.RNG_SEED = 3
 
@@ -193,7 +213,7 @@ __C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..', '..'))
 __C.DATA_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
 
 # Model directory
-__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models', 'pascal_voc'))
+__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models'))
 
 # Name (or path to) the matlab executable
 __C.MATLAB = 'matlab'
@@ -215,7 +235,9 @@ def get_output_dir(imdb, net=None):
     A canonical path is built using the name from an imdb and a network
     (if not None).
     """
-    outdir = osp.abspath(osp.join(__C.ROOT_DIR, 'output', __C.EXP_DIR, imdb.name))
+    ##outdir = osp.abspath(osp.join(__C.ROOT_DIR, 'output', __C.EXP_DIR, imdb.name))
+    outdir = osp.abspath(osp.join('/state','partition1','javier','output', __C.EXP_DIR, imdb.name))
+
     if net is not None:
         outdir = osp.join(outdir, net.name)
     if not os.path.exists(outdir):
