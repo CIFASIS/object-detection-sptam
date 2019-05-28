@@ -32,7 +32,7 @@ CLASSES = ('__background__',
            'toilet')
 
 NETS = {'vgg16': ('VGG16',
-                  'pose_cls_15k_15kcls_pose__iter_230000.caffemodel')}
+                  'pose_coco_Allconst_iter16000.caffemodel')}
 
 
 
@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
     ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/coco_2014_train/coco_15kr_50ks__iter_15000.caffemodel'
     ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k_40kcls_230kopose_p+c+r_iter_200000.caffemodel'
-    caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k250k5k_dyp__iter_10000.caffemodel'
+    caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
     if not os.path.isfile(caffemodel):
         raise IOError(('{:s} not found.\nDid you run ./data/script/'
                        'fetch_faster_rcnn_models.sh?').format(caffemodel))
@@ -192,7 +192,7 @@ if __name__ == '__main__':
 
     ## plt.show()
     from matplotlib.backends.backend_pdf import PdfPages
-    pp = PdfPages('/home/javier/multi.pdf')
+    pp = PdfPages('/home/erica/multi.pdf')
     for i in plt.get_fignums():
 	plt.figure(i)
 	pp.savefig()

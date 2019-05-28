@@ -82,7 +82,8 @@ elif FOLDER == 'partition1':
 
 elif FOLDER == 'abspath':
    ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k250k5k_dyp__iter_10000.caffemodel'
-   caffemodel = '/home/taihu/output/faster_rcnn_end2end/train/pose_coco_Allconst_iter_160000.caffemodel'
+   caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+# '/data/caffeModels/pose_coco_Allconst_iter_160000.caffemodel'
 	##coco_2014_train/coco_15kr_250ks__iter_5000.caffemodel'
 
 else:
@@ -126,7 +127,7 @@ def demo(im):
     ## Uncomment for time info
     #timer = Timer()
     #timer.tic()
-    scores, boxes = im_detect(NET, im)
+    scores, boxes = im_detect(NET, im, None)
     #timer.toc()
     #print ('Detection took {:.3f}s for '
     #       '{:d} object proposals').format(timer.total_time, boxes.shape[0])

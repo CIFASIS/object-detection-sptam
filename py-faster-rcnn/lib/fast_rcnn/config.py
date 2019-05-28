@@ -236,7 +236,7 @@ def get_output_dir(imdb, net=None):
     (if not None).
     """
     ##outdir = osp.abspath(osp.join(__C.ROOT_DIR, 'output', __C.EXP_DIR, imdb.name))
-    outdir = osp.abspath(osp.join('/state','partition1','javier','output', __C.EXP_DIR, imdb.name))
+    outdir = osp.abspath(osp.join('/data','output', __C.EXP_DIR, imdb.name))
 
     if net is not None:
         outdir = osp.join(outdir, net.name)

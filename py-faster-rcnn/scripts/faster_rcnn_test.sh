@@ -50,7 +50,7 @@ case $DATASET in
     ;;
 esac
 
-LOG="experiments/logs/faster_rcnn_endmod_${NET}_${EXTRA_ARGS_SLUG}.txt.`date +'%Y-%m-%d_%H-%M-%S'`"
+LOG="logs/faster_rcnn_endmod_${NET}_${EXTRA_ARGS_SLUG}.txt.`date +'%Y-%m-%d_%H-%M-%S'`"
 exec &> >(tee -a "$LOG")
 echo Logging output to "$LOG"
 
@@ -63,16 +63,16 @@ echo Logging output to "$LOG"
 ##NET_FINAL="/state/partition1/javier/output/faster_rcnn_end2end/coco_2014_train/coco_15kr_250ks__iter_5000.caffemodel"
 ## ultimo
 ##NET_FINAL="/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k250k5k_dyp_20+_iter_30000.caffemodel"
-NET_FINAL="/home/taihu/output/faster_rcnn_end2end/train/pose_coco_Allconst_iter_160000.caffemodel"
+NET_FINAL="/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel"
 
 ##NET_FINAL="/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k_onlypose__iter_40000.caffemodel"
 ##NET_FINAL="/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k_15kcls_pose__iter_230000.caffemodel"
 
 
 time ./tools/test_net.py --gpu ${GPU_ID} \
-  --def models/${PT_DIR}/${NET}/faster_rcnn_end2end/test.final.prototxt \
+  --def ../models_trained/${PT_DIR}/${NET}/faster_rcnn_end2end/test.final.prototxt \
   --net ${NET_FINAL} \
   --imdb ${TEST_IMDB} \
-  --cfg experiments/cfgs/faster_rcnn_posenet.yml \
+  --cfg cfgs/faster_rcnn_posenet.yml \
   ${EXTRA_ARGS}
 
