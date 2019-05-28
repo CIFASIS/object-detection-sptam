@@ -344,7 +344,7 @@ void sptam::stereo_driver::onDetection(const dl_node::DetectionWithPoseListConst
             
             const MapPoint& mapPoint = *sMapPoint ;
             const Eigen::Vector3d& point = mapPoint.GetPosition();
-            ROS_INFO('Antes del if')
+            ROS_INFO("Antes del if");
             // kf_counter
             //if (kf_cam.CanView(point)) {
             cv::Point2d projection = project( sDetection->GetSrcCamera().GetProjection(), eigen2cv( point ) );
