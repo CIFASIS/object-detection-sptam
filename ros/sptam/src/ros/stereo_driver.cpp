@@ -337,7 +337,7 @@ void sptam::stereo_driver::onDetection(const dl_node::DetectionWithPoseListConst
         //boost::shared_lock<boost::shared_mutex> lock(sptam_->GetMap().map_mutex_);
         
         //sptam::Map::SharedMapPointList pointList = sptam_->GetMap().getMapPoints();
-        ROS_INFO("Entro al for")
+        ROS_INFO("Entro al for");
         for (const auto& measurement : det_kf->measurements() ) {
             
             sptam::Map::SharedPoint sMapPoint = measurement->mapPoint() ;
