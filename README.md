@@ -110,6 +110,9 @@ Dependencias de sptam
     make all
     sudo make install
   
+##########################
+
+  catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
 
 
 
