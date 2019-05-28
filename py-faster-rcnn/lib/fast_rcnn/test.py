@@ -18,7 +18,9 @@ from fast_rcnn.nms_wrapper import nms
 import cPickle
 from utils.blob import im_list_to_blob
 import os
-
+#
+import math
+#
 def _get_image_blob(im):
     """Converts an image into a network input.
 
@@ -162,14 +164,16 @@ def im_detect(net, im, boxes=None):
     if cfg.TEST.SVM:
         # use the raw scores before softmax under the assumption they
         # were trained as linear SVMs
-        scores = net.blobs['cls_score'].data
+        ##scores = net.blobs['cls_score_modelnet'].data ##ACAAAAA
+        scores = net.blobs['cls_score'].data ###ACAAAAA
     else:
         # use softmax estimated probabilities
         scores = blobs_out['cls_prob']
 
     if cfg.TEST.BBOX_REG:
         # Apply bounding-box regression deltas
-        box_deltas = blobs_out['bbox_pred']
+        ##box_deltas = blobs_out['bbox_pred_modelnet'] ##ACCCCAAAA
+        box_deltas = blobs_out['bbox_pred'] ###ACCCAAA
         pred_boxes = bbox_transform_inv(boxes, box_deltas)
         pred_boxes = clip_boxes(pred_boxes, im.shape)
     else:
@@ -180,8 +184,15 @@ def im_detect(net, im, boxes=None):
         # Map scores and predictions back to the original set of boxes
         scores = scores[inv_index, :]
         pred_boxes = pred_boxes[inv_index, :]
-
-    return scores, pred_boxes
+    ####
+    if cfg.TEST.HAS_POSE:
+        delta_th = blobs_out['pose1d_pred']
+        bin_cls = blobs_out['bin_prob']
+        size_deltas = blobs_out['size_pred'] 
+        return scores, pred_boxes, delta_th, bin_cls,size_deltas
+    else:
+        return scores, pred_boxes
+    ####
 
 def vis_detections(im, class_name, dets, thresh=0.3):
     """Visual debugging of detections."""
@@ -233,6 +244,10 @@ def test_net(net, imdb, max_per_image=100, thresh=0.05, vis=False):
     all_boxes = [[[] for _ in xrange(num_images)]
                  for _ in xrange(imdb.num_classes)]
 
+    #### if cfg.TEST_HAS_POSE  x1,y1,x2,y2,score,angle,dimx,dimy,dimz
+    
+
+
     output_dir = get_output_dir(imdb, net)
 
     # timers
@@ -255,19 +270,63 @@ def test_net(net, imdb, max_per_image=100, thresh=0.05, vis=False):
 
         im = cv2.imread(imdb.image_path_at(i))
         _t['im_detect'].tic()
-        scores, boxes = im_detect(net, im, box_proposals)
+        
+        #Modif
+        if cfg.TEST.HAS_POSE:
+          scores, boxes,angle_deltas,angle_scores,size_deltas = im_detect(net, im, box_proposals)
+        else:
+          scores, boxes = im_detect(net, im, box_proposals)
+        #
+        
         _t['im_detect'].toc()
 
         _t['misc'].tic()
         # skip j = 0, because it's the background class
         for j in xrange(1, imdb.num_classes):
-            inds = np.where(scores[:, j] > thresh)[0]
+            inds = np.where(scores[:, j] > thresh)[0] ###ESTO VA ACA?
             cls_scores = scores[inds, j]
             cls_boxes = boxes[inds, j*4:(j+1)*4]
             cls_dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])) \
                 .astype(np.float32, copy=False)
             keep = nms(cls_dets, cfg.TEST.NMS)
             cls_dets = cls_dets[keep, :]
+            ## o aca?
+            #Modif
+            if cfg.TEST.HAS_POSE:
+               
+              #dirty hack ALERT 
+              poseinfo = np.empty_like(cls_dets)
+              #
+              thcls_scores = angle_scores[inds,:]
+              thcls_deltas = angle_deltas[inds,:]
+              sizecls_deltas = size_deltas[inds,:]    
+  
+              #thcls_scores = angle_scores[keep,:]
+              #thcls_deltas = angle_deltas[keep,:]
+              #sizecls_deltas = size_deltas[keep,:]
+              mean = cfg.SIZE_MEANS[j]
+              for ind,k in enumerate(keep):
+                 angle_bin = np.argmax(thcls_scores[k,j*8:(j+1)*8])
+                 poseinfo[ind][0] = angle_bin  * (2.0*math.pi / 8.0) + math.atan2(thcls_deltas[k,j*16 + angle_bin*2], thcls_deltas[k,j*16+angle_bin*2 + 1])
+                 # angle_bin = np.argmax(angle_scores[k,j*8:(j+1)*8]) # da entre 0 y 8
+                 # print(angle_bin,j,angle_bin1)
+                 # poseinfo[ind][0] = angle_bin  * (2.0*math.pi / 8.0) + math.atan2(angle_deltas[k,j*16 + angle_bin*2], angle_deltas[k,j*16+angle_bin*2 + 1])
+                 if (poseinfo[ind][0] < 0.0):
+                     poseinfo[ind][0] = poseinfo[ind][0] + 2.0*math.pi
+                 elif (poseinfo[ind][0] > 2.0*math.pi) :
+                     poseinfo[ind][0] = poseinfo[ind][0] - 2.0*math.pi
+                 ##
+                 #poseinfo[ind][1] = size_deltas[k,j*3 + 0] + mean[0]
+                 #poseinfo[ind][2] = size_deltas[k,j*3 + 1] + mean[1]
+                 #poseinfo[ind][3] = size_deltas[k,j*3 + 2] + mean[2]
+                 poseinfo[ind][1] = sizecls_deltas[k,j*3 + 0] + mean[0]
+                 poseinfo[ind][2] = sizecls_deltas[k,j*3 + 1] + mean[1]
+                 poseinfo[ind][3] = sizecls_deltas[k,j*3 + 2] + mean[2]
+              ## 
+              cls_dets = np.hstack((cls_dets,poseinfo)).astype(np.float32,copy=False)   
+            #
+            
+          
             if vis:
                 vis_detections(im, imdb.classes[j], cls_dets)
             all_boxes[j][i] = cls_dets
@@ -293,3 +352,4 @@ def test_net(net, imdb, max_per_image=100, thresh=0.05, vis=False):
 
     print 'Evaluating detections'
     imdb.evaluate_detections(all_boxes, output_dir)
+
