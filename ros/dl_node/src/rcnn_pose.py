@@ -85,6 +85,7 @@ elif FOLDER == 'abspath':
    caffemodel = '/home/nvidia/caffeModels/pose_coco_Allconst_iter16000.caffemodel' 
 #'/home/nvidia/caffeModels/pose_coco_Allconst_iter_160000.caffemodel'
 
+#   caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
 	##coco_2014_train/coco_15kr_250ks__iter_5000.caffemodel'
 
 else:
@@ -128,7 +129,7 @@ def demo(im):
     ## Uncomment for time info
     #timer = Timer()
     #timer.tic()
-    scores, boxes = im_detect(NET, im)
+    scores, boxes = im_detect(NET, im, None)
     #timer.toc()
     #print ('Detection took {:.3f}s for '
     #       '{:d} object proposals').format(timer.total_time, boxes.shape[0])
