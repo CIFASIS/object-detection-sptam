@@ -1,0 +1,38 @@
+FeatureDetector:
+
+  Name: 'AKAZE'
+
+  descriptor_type: 5
+  descriptor_size: 0
+  descriptor_channels: 1
+  threshold: 0.005
+  nOctaves: 1
+  nOctaveLayers: 1
+  diffusivity: 1
+
+DescriptorExtractor:
+  Name: 'AKAZE'
+
+  descriptor_type: 5
+  descriptor_size: 0
+  descriptor_channels: 1
+  threshold: 0.005
+  nOctaves: 1
+  nOctaveLayers: 1
+  diffusivity: 1
+
+DescriptorMatcher:
+  # normType: use
+  #  - NORM_L1 or NORM_L2 for SIFT and SURF descriptors
+  #  - NORM_HAMMING for ORB, BRISK, and BRIEF
+  #  - NORM_HAMMING2 should be used with ORB when WTA_K==3 or 4
+  Name: 'BruteForce-Hamming'
+  crossCheck: false
+
+MatchingCellSize: 15
+MatchingNeighborhood: 1
+MatchingDistance: 15
+EpipolarDistance: 1
+FrustumNearPlaneDist: 0.1
+FrustumFarPlaneDist: 10000.0
+BundleAdjustmentActiveKeyframes: 10
