@@ -33,9 +33,9 @@ CLASSES = ('__background__',
            'dresser', 'monitor', 'night_stand', 'sofa', 'table',
            'toilet')
 
-NETS = {'vgg16': ('VGG16',
-                  'pose_coco_Allconst_iter16000.caffemodel')}
 
+NETS = {'vgg16': ('VGG16', 'pose_coco_Allconst_iter16000.caffemodel')}
+#                  'pose_cls_15k_15kcls_pose__iter_230000.caffemodel')}
 
 
 def vis_detections(im, class_name, dets,th_scores,th_sincos,size_deltas,cls_ind,thresh=0.5):
@@ -158,7 +158,10 @@ if __name__ == '__main__':
 
     ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/coco_2014_train/coco_15kr_50ks__iter_15000.caffemodel'
     ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k_40kcls_230kopose_p+c+r_iter_200000.caffemodel'
-    caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+
+    caffemodel = '~/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+#    caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+
     if not os.path.isfile(caffemodel):
         raise IOError(('{:s} not found.\nDid you run ./data/script/'
                        'fetch_faster_rcnn_models.sh?').format(caffemodel))
@@ -176,7 +179,7 @@ if __name__ == '__main__':
     # Warmup on a dummy image
     im = 128 * np.ones((300, 500, 3), dtype=np.uint8)
     for i in xrange(2):
-        _, _, _,_,_  = im_detect(net, im)
+        _, _, _,_,_  = im_detect(net, im, None)
 
     im_names_real = ['real01.jpg','real02.jpg','real03.jpg','real04.jpg','real05.jpg','real06.jpg','real07.jpg','real08.jpg','real09.jpg','real10.jpg','real11.jpg','real12.jpg','real13.jpg','real14.jpg','real15.jpg','real16.jpg','real17.jpg','real18.jpg','real19.jpg','real20.jpg','real21.jpg','real22.jpg','real23.jpg','real24.jpg','real25.jpg','real26.jpg','frame0.jpg','bedroom_01.jpeg','cluter1.jpg','dresser1.jpg','dresser2.jpg','monitor1.jpg']
     im_names_gen = ['p277_1_0.jpg','p274_1_0.jpg','t69_1_0.jpg','t71_1_0.jpg','t92_1_0.jpg','t82_1_0.jpg','t83_1_0.jpg','t116_1_0.jpg','t114_1_0.jpg','t113_1_0.jpg','t94_1_0.jpg','t89_1_0.jpg','t76_1_0.jpg','t74_1_0.jpg','t48_1_0.jpg','t33_1_0.jpg']
@@ -196,6 +199,10 @@ if __name__ == '__main__':
     ## plt.show()
     from matplotlib.backends.backend_pdf import PdfPages
     pp = PdfPages('demo_out.pdf')
+
+#    pp = PdfPages('~/multi.pdf')
+
+
     for i in plt.get_fignums():
 	plt.figure(i)
 	pp.savefig()
