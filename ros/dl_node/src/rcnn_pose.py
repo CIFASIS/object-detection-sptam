@@ -19,6 +19,11 @@ from fast_rcnn.test import im_detect
 from fast_rcnn.nms_wrapper import nms
 
 from utils.timer import Timer
+## esto es por si da este error por no tener X
+## https://stackoverflow.com/questions/37604289/tkinter-tclerror-no-display-name-and-no-display-environment-variable 
+import matplotlib
+matplotlib.use('Agg')
+####
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio

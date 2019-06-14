@@ -18,6 +18,8 @@ from fast_rcnn.config import cfg
 from fast_rcnn.test import im_detect
 from fast_rcnn.nms_wrapper import nms
 from utils.timer import Timer
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio
@@ -147,9 +149,10 @@ if __name__ == '__main__':
 
     args = parse_args()
 
-    prototxt = os.path.join(cfg.MODELS_DIR, 'modelpose', NETS[args.demo_net][0],
-                            'faster_rcnn_end2end', 'test.final.prototxt')
-  
+    ##prototxt = os.path.join(cfg.MODELS_DIR, 'modelpose', NETS[args.demo_net][0],
+    ##                            'faster_rcnn_end2end', 'test.final.prototxt')
+    prototxt = '/data/ondeloc/models_trained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt'	  
+
     ## caffemodel = os.path.join(cfg.ROOT_DIR, 'output','faster_rcnn_end2end','train',
     ##                          NETS[args.demo_net][1])
 
@@ -178,13 +181,13 @@ if __name__ == '__main__':
     im_names_real = ['real01.jpg','real02.jpg','real03.jpg','real04.jpg','real05.jpg','real06.jpg','real07.jpg','real08.jpg','real09.jpg','real10.jpg','real11.jpg','real12.jpg','real13.jpg','real14.jpg','real15.jpg','real16.jpg','real17.jpg','real18.jpg','real19.jpg','real20.jpg','real21.jpg','real22.jpg','real23.jpg','real24.jpg','real25.jpg','real26.jpg','frame0.jpg','bedroom_01.jpeg','cluter1.jpg','dresser1.jpg','dresser2.jpg','monitor1.jpg']
     im_names_gen = ['p277_1_0.jpg','p274_1_0.jpg','t69_1_0.jpg','t71_1_0.jpg','t92_1_0.jpg','t82_1_0.jpg','t83_1_0.jpg','t116_1_0.jpg','t114_1_0.jpg','t113_1_0.jpg','t94_1_0.jpg','t89_1_0.jpg','t76_1_0.jpg','t74_1_0.jpg','t48_1_0.jpg','t33_1_0.jpg']
     im_names_room = ['v1_1_0.jpg','v2_1_0.jpg','v3_1_0.jpg','v4_1_0.jpg','v5_1_0.jpg','v6_1_0.jpg','v7_1_0.jpg','v8_1_0.jpg','v9_1_0.jpg','v10_1_0.jpg','v11_1_0.jpg','v12_1_0.jpg','v14_1_0.jpg','v117_1_0.jpg']
-    
-    testfile = os.path.join(cfg.DATA_DIR, 'modelnet_devkit', 'room25kp','ImageSets','minitest.txt')
-    with open(testfile) as f:
-       test_lines = f.read().splitlines()
-    im_names_test = [s + '.jpg' for s in test_lines]
+    im_demo_images = ['livingroom1.jpg','chair1.jpg'] 
+    #testfile = os.path.join(cfg.DATA_DIR, 'modelnet_devkit', 'room25kp','ImageSets','minitest.txt')
+    #with open(testfile) as f:
+    #   test_lines = f.read().splitlines()
+    #im_names_test = [s + '.jpg' for s in test_lines]
     #im_names = im_names_test
-    im_names = im_names_real
+    im_names = ['/data/ondeloc/py-faster-rcnn/tools/demo_images/'+s  for s in im_demo_images]
     for im_name in im_names:
         print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
         print 'Demo for data/demo/{}'.format(im_name)
@@ -192,7 +195,7 @@ if __name__ == '__main__':
 
     ## plt.show()
     from matplotlib.backends.backend_pdf import PdfPages
-    pp = PdfPages('/home/erica/multi.pdf')
+    pp = PdfPages('demo_out.pdf')
     for i in plt.get_fignums():
 	plt.figure(i)
 	pp.savefig()
