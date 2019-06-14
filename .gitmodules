@@ -1,0 +1,3 @@
+[submodule "ros/sptam-object-detection"]
+	path = ros/sptam-object-detection
+	url = git@repositorio.cifasis-conicet.gov.ar:robotica/sptam-object-detection.git
