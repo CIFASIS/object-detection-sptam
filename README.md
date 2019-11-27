@@ -49,7 +49,7 @@ copiar o moverlos para que funcione.
 
 # Compilation
 
-**caffe-fast-rcnn**
+## caffe-fast-rcnn
 
 *dependencia general Ubuntu 16.01*
 
@@ -57,13 +57,13 @@ copiar o moverlos para que funcione.
     sudo apt-get install --no-install-recommends libboost-all-dev
     sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
     
-**Blas**
+## Blas
  
- **ATLAS**:
+## ATLAS
  
     apt-get install libatlas-base-dev
  
- **caffe**
+## caffe
  
     cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
     mkdir build
@@ -72,13 +72,13 @@ copiar o moverlos para que funcione.
     make -j4 && make pycaffe
     make install
     
- **py-faster-rcnn**
+## py-faster-rcnn
  
     cd lib
     make
  
 
-Agregar 
+## Python dependencies and softlinks creation
 
     pip install --user easydict
     pip install --user skimage
