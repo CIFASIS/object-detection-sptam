@@ -1,9 +1,37 @@
-*En progreso ...* 
+*README in progress.* 
+
+*object-detection-sptam* is a SLAM system for stereo cameras which builds a map of objects in a scene. The system is based on the SLAM method S-PTAM and an object detection module. The object detection module uses Deep Learning to perform online detection and provide the 3d pose estimations of objects present in an input image, while S-PTAM estimates the camera pose in real time.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ojBB07JvDrY
+" target="_blank"><img src="http://img.youtube.com/vi/ojBB07JvDrY/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="560" height="315" border="0" /></a>  
+(Click the image to redirect to S-PTAM video)
+
+## Related Publications:
+[1]  Taihú Pire, Javier Corti and Guillermo Grinblat.
+**Online Object Detection and Localization on Stereo Visual SLAM System**
+Journal of Intelligent & Robotic Systems, 2019.
+
+## Table of Contents
+- [License](#license)
+- [Disclaimer](#disclaimer)
+- [Dependencies](#dependencies)
+
+# License
+
+object-detection-sptam is released under GPLv3 license.
+
+For a closed-source version of object-detection-sptam for commercial purposes, please contact the authors.
+
+# Disclaimer
+This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
+
+Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
 En el directorio ros están los nodos de Ros y el modelo que usa para correr definido en rcnn_pose.py 
 Mover el contenido del directorio ros al workspace de ros y compilar 
 
-para correr:
+# Run
 
     roslaunch sptam dl_zed.launch
 
@@ -19,9 +47,7 @@ copiar o moverlos para que funcione.
     cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
 
 
-    
-    
-*COMPILACIÓN*
+# Compilation
 
 **caffe-fast-rcnn**
 
@@ -51,8 +77,6 @@ copiar o moverlos para que funcione.
     cd lib
     make
  
- 
-
 
 Agregar 
 
@@ -69,19 +93,13 @@ Agregar
     ln -s ~/ondeloc/py-faster-rcnn/lib/pycocotools pycocotools
     ln -s ~/ondeloc/py-faster-rcnn/lib/transform transform
 
+# S-PTAM Dependencies
 
-
-    
- 
-
-**dependencies**
-Dependencias de sptam
-
-**SuiteSparse**
+## SuiteSparse
     
     sudo apt-get install libsuitesparse-dev
 
-  **g2o** 
+## g2o 
     
     cd  ~/ondeloc/dependencies/
     source getG2o.sh
@@ -91,11 +109,11 @@ Dependencias de sptam
     make 
     sudo make install
     
-**meta**
+## meta
     
     sudo cp -Rf ~/ondeloc/dependencies/meta/include/meta /usr/include/
 
-**pugixml** 
+## pugixml
     
     cd ~/ondeloc/dependencies/pugixml
     mkdir build
@@ -104,7 +122,7 @@ Dependencias de sptam
     make
     sudo make install/local
     
-**ApproxMVBB**
+## ApproxMVBB
  
     cd ~/ondeloc/dependencies/
     source getApproxMVBB.sh 
@@ -118,16 +136,3 @@ Dependencias de sptam
 ##########################
 
   catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
-
-
-
-
-    
- 
- 
- 
- 
- 
- 
- 
- 
