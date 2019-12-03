@@ -48,7 +48,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
  
     sudo apt-get install libatlas-base-dev
  
-### caffe
+### Compile and Install Caffe
  
     cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
     mkdir build
@@ -57,26 +57,25 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make -j4 && make pycaffe
     make install
     
-### py-faster-rcnn
+### Compile py-faster-rcnn
  
-    cd lib
+    cd ~/object-detection-sptam/py-faster-rcnn/lib
     make
- 
 
 ### Python dependencies and softlinks creation
 
     pip install --user easydict
     pip install --user skimage
     cd ~/.local/lib/python2.7/site-packages
-    ln -s ~/ondeloc/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
-    ln -s ~/ondeloc/py-faster-rcnn/lib/fast_rcnn fast_rcnn
-    ln -s ~/ondeloc/py-faster-rcnn/lib/utils utils
-    ln -s ~/ondeloc/py-faster-rcnn/lib/nms nms
-    ln -s ~/ondeloc/py-faster-rcnn/lib/rpn rpn
-    ln -s ~/ondeloc/py-faster-rcnn/lib/datasets datasets
-    ln -s ~/ondeloc/py-faster-rcnn/lib/roi_data_layer roi_data_layer
-    ln -s ~/ondeloc/py-faster-rcnn/lib/pycocotools pycocotools
-    ln -s ~/ondeloc/py-faster-rcnn/lib/transform transform
+    ln -s ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/fast_rcnn fast_rcnn
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/utils utils
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/nms nms
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/rpn rpn
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/datasets datasets
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/roi_data_layer roi_data_layer
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/pycocotools pycocotools
+    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/transform transform
 
 ## Modified S-PTAM Dependencies
 
@@ -86,9 +85,9 @@ Move the content of ros directory (ros nodes and the network model that is used 
 
 ### g2o 
     
-    cd  ~/ondeloc/dependencies/
+    cd  ~/object-detection-sptam/dependencies/
     source getG2o.sh
-    cd ~/ondeloc/dependencies/g2o
+    cd ~/object-detection-sptam/dependencies/g2o
     mkdir build && cd build
     cmake ..
     make 
@@ -96,11 +95,11 @@ Move the content of ros directory (ros nodes and the network model that is used 
     
 ### meta
     
-    sudo cp -Rf ~/ondeloc/dependencies/meta/include/meta /usr/include/
+    sudo cp -Rf ~/object-detection-sptam/dependencies/meta/include/meta /usr/include/
 
 ### pugixml
     
-    cd ~/ondeloc/dependencies/pugixml
+    cd ~/object-detection-sptam/dependencies/pugixml
     mkdir build
     cd build
     cmake ..
@@ -109,9 +108,9 @@ Move the content of ros directory (ros nodes and the network model that is used 
     
 ### ApproxMVBB
  
-    cd ~/ondeloc/dependencies/
+    cd ~/object-detection-sptam/dependencies/
     source getApproxMVBB.sh 
-    cd  ~/ondeloc/dependencies/ApproxMVBB
+    cd  ~/object-detection-sptam/dependencies/ApproxMVBB
     mkdir build
     cd build 
     cmake ..
@@ -136,5 +135,5 @@ that is in the models_tained directory:
     
 copy or moved to python directory: 
 
-    cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
+    cp -Rf /data/object-detection-sptam/models_trained/* ~/.local/lib/python2.7/models/
 
