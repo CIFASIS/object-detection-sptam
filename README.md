@@ -5,7 +5,7 @@
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=SgUq-DN0By0
 " target="_blank"><img src="http://img.youtube.com/vi/SgUq-DN0By0/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="560" height="315" border="0" /></a>  
-(Click the image to redirect to S-PTAM video)
+(Click the image to redirect to object-detection-sptam video)
 
 ## Related Publications:
 [1]  Taihú Pire, Javier Corti and Guillermo Grinblat.
@@ -35,14 +35,14 @@ Mover el contenido del directorio ros al workspace de ros y compilar
 
     roslaunch sptam dl_zed.launch
 
-En tiempo de ejecución pide por
+On execution is going to ask:
     ~/.local/lib/python2.7/models/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
 
-que está en el directio models_tained:
+that is in the models_tained directory:
 
     models_tained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
     
-copiar o moverlos para que funcione.    
+copy or moved to python directory: 
 
     cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
 
@@ -51,7 +51,7 @@ copiar o moverlos para que funcione.
 
 ## caffe-fast-rcnn
 
-*dependencia general Ubuntu 16.01*
+*Tested under Ubuntu 16.01*
 
     sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
     sudo apt-get install --no-install-recommends libboost-all-dev
@@ -132,7 +132,6 @@ copiar o moverlos para que funcione.
     cmake ..
     make all
     sudo make install
-  
-##########################
 
-  catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
+## Compile with catkin-tools
+    catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
