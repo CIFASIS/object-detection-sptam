@@ -32,13 +32,15 @@ Move the content of ros directory (ros nodes and the network model that is used 
 
 ## caffe-fast-rcnn
 
-*Tested under Ubuntu 16.01*
+*Tested on Ubuntu 16.01*
 
     sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
     sudo apt-get install --no-install-recommends libboost-all-dev
     sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
     
 ## Blas
+
+    sudo apt-get install libblas-dev liblapack-dev
  
 ## ATLAS
  
