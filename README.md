@@ -28,9 +28,6 @@ This site and the code provided here are under active development. Even though w
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-En el directorio ros están los nodos de Ros y el modelo que usa para correr definido en rcnn_pose.py 
-Mover el contenido del directorio ros al workspace de ros y compilar 
-
 # Run
 
     roslaunch sptam dl_zed.launch
@@ -61,7 +58,7 @@ copy or moved to python directory:
  
 ## ATLAS
  
-    apt-get install libatlas-base-dev
+    sudo apt-get install libatlas-base-dev
  
 ## caffe
  
