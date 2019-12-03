@@ -62,7 +62,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
     cd ~/object-detection-sptam/py-faster-rcnn/lib
     make
 
-### Python dependencies and softlinks creation
+### Install py-faster-rcnn
 
     pip install --user easydict
     pip install --user skimage
