@@ -14,6 +14,8 @@ Journal of Intelligent & Robotic Systems, 2019.
 - [License](#license)
 - [Disclaimer](#disclaimer)
 - [Dependencies](#dependencies)
+- [Compilation](#compilation)
+- [Run](#run)
 
 # License
 
@@ -24,25 +26,9 @@ For a closed-source version of object-detection-sptam for commercial purposes, p
 # Disclaimer
 This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
 
-Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
-
-# Run
-
-    roslaunch sptam dl_zed.launch
-
-On execution is going to ask:
-    ~/.local/lib/python2.7/models/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
-
-that is in the models_tained directory:
-
-    models_tained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
-    
-copy or moved to python directory: 
-
-    cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
-
-
 # Compilation
+
+Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
 ## caffe-fast-rcnn
 
@@ -130,3 +116,20 @@ copy or moved to python directory:
 
 ## Compile with catkin-tools
     catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
+    
+# Run
+
+    roslaunch sptam dl_zed.launch
+
+On execution is going to ask:
+    
+    ~/.local/lib/python2.7/models/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
+
+that is in the models_tained directory:
+
+    models_tained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt
+    
+copy or moved to python directory: 
+
+    cp -Rf /data/ondeloc/models_trained/* ~/.local/lib/python2.7/models/
+
