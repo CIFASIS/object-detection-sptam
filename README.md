@@ -26,11 +26,13 @@ For a closed-source version of object-detection-sptam for commercial purposes, p
 # Disclaimer
 This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
 
-# Compilation
+# Dependencies
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-## caffe-fast-rcnn
+## py-faster-rcnn
+
+### caffe-fast-rcnn
 
 *Tested on Ubuntu 16.01*
 
@@ -38,15 +40,15 @@ Move the content of ros directory (ros nodes and the network model that is used 
     sudo apt-get install --no-install-recommends libboost-all-dev
     sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
     
-## Blas
+### Blas
 
     sudo apt-get install libblas-dev liblapack-dev
  
-## ATLAS
+### ATLAS
  
     sudo apt-get install libatlas-base-dev
  
-## caffe
+### caffe
  
     cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
     mkdir build
@@ -55,7 +57,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make -j4 && make pycaffe
     make install
     
-## py-faster-rcnn
+### py-faster-rcnn
  
     cd lib
     make
@@ -76,13 +78,13 @@ Move the content of ros directory (ros nodes and the network model that is used 
     ln -s ~/ondeloc/py-faster-rcnn/lib/pycocotools pycocotools
     ln -s ~/ondeloc/py-faster-rcnn/lib/transform transform
 
-# S-PTAM Dependencies
+## Modified S-PTAM Dependencies
 
-## SuiteSparse
+### SuiteSparse
     
     sudo apt-get install libsuitesparse-dev
 
-## g2o 
+### g2o 
     
     cd  ~/ondeloc/dependencies/
     source getG2o.sh
@@ -92,11 +94,11 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make 
     sudo make install
     
-## meta
+### meta
     
     sudo cp -Rf ~/ondeloc/dependencies/meta/include/meta /usr/include/
 
-## pugixml
+### pugixml
     
     cd ~/ondeloc/dependencies/pugixml
     mkdir build
@@ -105,7 +107,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make
     sudo make install/local
     
-## ApproxMVBB
+### ApproxMVBB
  
     cd ~/ondeloc/dependencies/
     source getApproxMVBB.sh 
@@ -116,7 +118,8 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make all
     sudo make install
 
-## Compile with catkin-tools
+# Compilation
+
     catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
     
 # Run
