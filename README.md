@@ -30,7 +30,7 @@ This site and the code provided here are under active development. Even though w
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-## py-faster-rcnn
+## py-faster-rcnn Dependencies
 
 ### caffe-fast-rcnn
 
@@ -63,7 +63,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make
  
 
-## Python dependencies and softlinks creation
+### Python dependencies and softlinks creation
 
     pip install --user easydict
     pip install --user skimage
