@@ -23,6 +23,27 @@ object-detection-sptam is released under GPLv3 license.
 
 For a closed-source version of object-detection-sptam for commercial purposes, please contact the authors.
 
+If you use *object-detection-sptam* in an academic work, please cite:
+
+@article{pire2019object,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  title = {{Online Object Detection and Localization on Stereo Visual SLAM System}},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  author = {Pire, Taih{\'u} and Corti, Javier and Grinblat, Guillermo},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  journal = {Journal of Intelligent {\&} Robotic Systems},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  day = {27},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  month = {August},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  year = {2019},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  issn = {1573-0409},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  doi = {10.1007/s10846-019-01074-2}  
+}
+
 # Disclaimer
 This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
 
