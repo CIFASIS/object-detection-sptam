@@ -49,7 +49,6 @@ NETS= {'vgg16':('VGG16',"pose_cls_15k_40kcls_230kopose_p+c+r_iter_200000.caffemo
 
 FOLDER = 'abspath'
 
-   ##  '180000.caffemodel')}      'roomgen15k_voc_120000.caffemodel')}
                  
 
 #def parse_args():
@@ -86,12 +85,8 @@ elif FOLDER == 'partition1':
    caffemodel = os.path.join('/home/taihu/output/faster_rcnn_end2end/train',NETS[demo_net][1])
 
 elif FOLDER == 'abspath':
-   ##caffemodel = '/state/partition1/javier/output/faster_rcnn_end2end/train/pose_cls_15k250k5k_dyp__iter_10000.caffemodel'
-   caffemodel = '/home/nvidia/caffeModels/pose_coco_Allconst_iter16000.caffemodel' 
-#'/home/nvidia/caffeModels/pose_coco_Allconst_iter_160000.caffemodel'
 
-#   caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
-	##coco_2014_train/coco_15kr_250ks__iter_5000.caffemodel'
+   caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
 
 else:
    caffemodel = os.path.join(cfg.ROOT_DIR, 'output','faster_rcnn_end2end','train',
