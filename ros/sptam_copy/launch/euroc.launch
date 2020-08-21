@@ -1,0 +1,114 @@
+<launch>
+  <arg name="predict" default="true"/>
+  <arg name="detector" default="orb"/>
+  <arg name="descriptor" default="brief"/>
+  <arg name="toplot" default="false"/> 
+
+  <!-- Set use_sim_time true for datasets-->
+  <param name="use_sim_time" value="true"/>
+
+  <group ns="stereo">
+
+    <!-- Call stereo_image_proc to undistort and rectify images -->
+    <!--<node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" >
+      <remap from="/stereo/left/image_raw"  to="/cam0/image_raw"/>
+      <remap from="/stereo/right/image_raw"  to="/cam1/image_raw"/>
+      <remap from="/stereo/left/camera_info"  to="/cam0/camera_info"/>
+      <remap from="/stereo/right/camera_info"  to="/cam1/camera_info"/>
+    </node>-->
+  </group>
+
+
+  <group if="$(arg predict)">
+    <node pkg="ros_utils" type="odom_to_pose" name="odom_to_pose">
+      <remap from="odom" to="msf_core/odometry"/>
+      <param name="target_frame" value="base_link"/>
+    </node>
+  </group>
+
+  <include file="$(find sptam)/launch/msf.launch" if="$(arg predict)"/>
+
+
+  <!-- Publish static transform between robot origin and left camera origin-->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_cam0_broadcaster" args="-0.0216401454975 -0.064676986768 0.00981073058949 1.5559252954916372 0.02577729130330495 0.003757445479965962 imu4 cam0"/> 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_cam1_broadcaster" args="-0.0216401454975 0.064676986768 0.00981073058949 1.5582366807216512 0.025392529572065364 0.01790731339694836 imu4 cam1"/>
+
+  <!-- orientation from GT dataset -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="bl_broadcaster" args="0 0 0  -0.81743 0.011702 -0.57591 0.0015811 base_link imu4"/> 
+
+
+ <!-- relative transforms for GT handling (TODO: recheck, should match starting position of SPTAM) -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="gr_broadcaster2" args="0 0 0 0 0 0 map_prev map"/>
+ <node pkg="tf2_ros" type="static_transform_publisher" name="gr_broadcaster" args="4.566874 -1.676021 0.572093 -0.086352 -0.791972 -0.023578 0.603961 leica map_prev"/>
+
+  <!-- S-PTAM path publisher. Transforms poses into path. -->
+  <node pkg="ros_utils" type="pose_to_path" name="sptam_path">
+    <remap from="pose" to="sptam/robot/pose" />
+    <remap from="path" to="sptam/robot/path" />
+  </node>
+
+
+  <!-- Clean S-PTAM parameters -->
+  <rosparam command="delete" ns="sptam"/>
+
+  <!-- Read S-PTAM parameters file -->
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_orb_brief.yaml" if="$(eval (arg ('detector') == 'orb') and (arg ('descriptor') == 'brief'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_gftt_brief.yaml" if="$(eval (arg ('detector') == 'gftt') and (arg ('descriptor') == 'brief'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_orb_brisk.yaml" if="$(eval (arg ('detector') == 'orb') and (arg ('descriptor') == 'brisk'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_gftt_brisk.yaml" if="$(eval (arg ('detector') == 'gftt') and (arg ('descriptor') == 'brisk'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_orb.yaml" if="$(eval (arg ('detector') == 'orb') and (arg ('descriptor') == 'orb'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_star_brief.yaml" if="$(eval (arg ('detector') == 'star') and (arg ('descriptor') == 'brief'))"/>
+  <rosparam command="load" ns="sptam" file="$(find sptam)/configurationFiles/euroc_star_brisk.yaml" if="$(eval (arg ('detector') == 'star') and (arg ('descriptor') == 'brisk'))"/>
+
+
+
+  <!-- Nodelet Manager -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager" output="screen" clear_params="true"/>
+
+  <!-- image proc nodelets -->
+   <node pkg="nodelet" type="nodelet" name="image_proc_left" args="load image_proc/rectify nodelet_manager" output="screen" clear_params="true">
+    <param name="queue_size" value="1"/>
+    <remap from="image_mono" to="cam0/image_raw"/>
+    <remap from="camera_info" to="cam0/camera_info"/>
+    <remap from="image_rect" to="/stereo/left/image_rect"/>
+  </node>
+
+   <node pkg="nodelet" type="nodelet" name="image_proc_right" args="load image_proc/rectify nodelet_manager" output="screen" clear_params="true">
+    <param name="queue_size" value="1"/>
+    <remap from="image_mono" to="cam1/image_raw"/>
+    <remap from="camera_info" to="cam1/camera_info"/>
+    <remap from="image_rect" to="/stereo/right/image_rect"/>
+  </node>
+
+  <!-- SPTAM Nodelet -->
+  <node pkg="nodelet" type="nodelet" name="sptam" args="load sptam/sptam_nodelet nodelet_manager" output="screen" clear_params="true" >
+
+   <param name="approximate_sync" value="false" />
+
+   <!-- when using MSF -->
+   <param name="use_prediction" value="true" if="$(arg predict)"/>
+   <param name="publish_transform" value="false" if="$(arg predict)"/> <!-- it will be MSF who publishes where the robot is -->
+   <param name="base_frame" value="cam0" if="$(arg predict)"/> <!-- for MSF, which expects pose of camera -->
+
+   <!-- when not using MSF -->
+   <param name="use_prediction" value="false" unless="$(arg predict)"/>
+   <param name="publish_transform" value="true" unless="$(arg predict)"/>
+   <param name="base_frame" value="$(eval 'cam0' if arg('toplot') else 'base_link')" unless="$(arg predict)"/>
+
+   <param name="prediction_frame" value="map"/>
+   <param name="camera_frame" value="cam0"/>  <!-- set left camera frame -->
+
+   <!-- Remap topics  -->
+   <!--<remap from="/stereo/left/image_rect"  to="/stereo/left/image_rect_color"/>
+   <remap from="/stereo/right/image_rect"  to="/stereo/right/image_rect_color"/>-->
+   <remap from="/stereo/left/camera_info"  to="/cam0/camera_info"/>
+   <remap from="/stereo/right/camera_info"  to="/cam1/camera_info"/>
+
+   <!-- Remap Odometry message -->
+   <remap from="robot/pose"  to="odom"/>
+
+  </node>
+
+
+</launch>

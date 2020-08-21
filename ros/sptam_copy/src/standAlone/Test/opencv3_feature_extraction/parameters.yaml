@@ -1,0 +1,6 @@
+%YAML:1.0
+
+FeatureDetector:
+  Name: 'SURF'
+  hessianThreshold: 1000
+  nOctaves: 1
