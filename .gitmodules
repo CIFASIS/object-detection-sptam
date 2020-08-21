@@ -4,3 +4,7 @@
 	branch = javier
 
 
+[submodule "py-faster-rcnn"]
+	path = py-faster-rcnn
+	url = https://github.com/CIFASIS/py-faster-rcnn.git
+	branch = master
