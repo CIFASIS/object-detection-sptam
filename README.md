@@ -51,52 +51,14 @@ This site and the code provided here are under active development. Even though w
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-## py-faster-rcnn Dependencies
+## Install py-faster-rcnn and caffe-fast-rcnn
 
-### caffe-fast-rcnn
+Clone the Faster R-CNN repository
+     
+     git submodule update --init --recursive 
 
-*Tested on Ubuntu 16.01*
+and follow the installation instructions
 
-    sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
-    sudo apt-get install --no-install-recommends libboost-all-dev
-    sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
-    
-### Blas
-
-    sudo apt-get install libblas-dev liblapack-dev
- 
-### ATLAS
- 
-    sudo apt-get install libatlas-base-dev
- 
-### Compile and Install Caffe
- 
-    cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
-    mkdir build
-    cd build
-    cmake ..
-    make -j4 && make pycaffe
-    make install
-    
-### Compile py-faster-rcnn
- 
-    cd ~/object-detection-sptam/py-faster-rcnn/lib
-    make
-
-### Install py-faster-rcnn
-
-    pip install --user easydict
-    pip install --user skimage
-    cd ~/.local/lib/python2.7/site-packages
-    ln -s ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/build/install/python/caffe caffe
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/fast_rcnn fast_rcnn
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/utils utils
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/nms nms
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/rpn rpn
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/datasets datasets
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/roi_data_layer roi_data_layer
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/pycocotools pycocotools
-    ln -s ~/object-detection-sptam/py-faster-rcnn/lib/transform transform
 
 ## Modified S-PTAM Dependencies
 
