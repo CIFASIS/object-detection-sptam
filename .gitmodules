@@ -11,3 +11,6 @@
 [submodule "g2o"]
 	path = g2o
 	url = https://github.com/CIFASIS/g2o.git
+[submodule "ApproxMVBB"]
+	path = ApproxMVBB
+	url = https://github.com/CIFASIS/ApproxMVBB.git
