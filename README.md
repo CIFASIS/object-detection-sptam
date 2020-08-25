@@ -60,17 +60,17 @@ Clone the Faster R-CNN repository
 and follow the installation instructions
 
 
+
 ## Modified S-PTAM Dependencies
 
 ### SuiteSparse
     
     sudo apt-get install libsuitesparse-dev
+sd
 
 ### g2o 
     
-    cd  ~/object-detection-sptam/dependencies/
-    source getG2o.sh
-    cd ~/object-detection-sptam/dependencies/g2o
+    cd ~/object-detection-sptam/g2o
     mkdir build && cd build
     cmake ..
     make 
@@ -91,9 +91,7 @@ and follow the installation instructions
     
 ### ApproxMVBB
  
-    cd ~/object-detection-sptam/dependencies/
-    source getApproxMVBB.sh 
-    cd  ~/object-detection-sptam/dependencies/ApproxMVBB
+    cd  ~/object-detection-sptam/ApproxMVBB
     mkdir build
     cd build 
     cmake ..
