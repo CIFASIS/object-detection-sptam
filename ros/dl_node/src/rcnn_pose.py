@@ -83,7 +83,7 @@ if FOLDER == 'data':
 
 elif FOLDER == 'abspath':
 
-   caffemodel = '~/object-detection-sptam/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+   caffemodel = '../object-detection-sptam/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
 
 else:
    caffemodel = os.path.join(cfg.ROOT_DIR, 'output','faster_rcnn_end2end','train',
