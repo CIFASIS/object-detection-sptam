@@ -4,7 +4,3 @@
 [submodule "ApproxMVBB"]
 	path = ApproxMVBB
 	url = https://github.com/CIFASIS/ApproxMVBB.git
-[submodule "opencv"]
-	path = opencv
-	url = https://github.com/CIFASIS/opencv.git
-	branch = 3.4
