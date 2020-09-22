@@ -1,0 +1,27 @@
+FeatureDetector:
+  Name: 'SURF'
+  hessianThreshold: 1000
+  nOctaves: 1
+
+DescriptorExtractor:
+  Name: 'SURF'
+  hessianThreshold: 1000
+  nOctaves: 1
+
+
+DescriptorMatcher:
+  # normType: use
+  #  - NORM_L1 or NORM_L2 for SIFT and SURF descriptors
+  #  - NORM_HAMMING for ORB, BRISK, and BRIEF
+  #  - NORM_HAMMING2 should be used with ORB when WTA_K==3 or 4
+  # use L2 norm type as default when it is not especified
+  Name: 'BruteForce'
+  crossCheck: false
+
+MatchingCellSize: 15
+MatchingNeighborhood: 1
+MatchingDistance: 0.2
+EpipolarDistance: 1
+FrustumNearPlaneDist: 0.1
+FrustumFarPlaneDist: 10000.0
+BundleAdjustmentActiveKeyframes: 10

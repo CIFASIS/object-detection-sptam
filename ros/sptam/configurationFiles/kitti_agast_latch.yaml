@@ -1,0 +1,28 @@
+FeatureDetector:
+
+  Name: 'AGAST'
+
+  threshold: 60
+  nonmaxSuppression: true
+
+DescriptorExtractor:
+  Name: 'LATCH'
+  bytes: 32
+  rotationInvariance: false
+  half_ssd_size: 3
+
+DescriptorMatcher:
+  # normType: use
+  #  - NORM_L1 or NORM_L2 for SIFT and SURF descriptors
+  #  - NORM_HAMMING for ORB, BRISK, and BRIEF
+  #  - NORM_HAMMING2 should be used with ORB when WTA_K==3 or 4
+  Name: 'BruteForce-Hamming'
+  crossCheck: false
+
+MatchingCellSize: 15
+MatchingNeighborhood: 1
+MatchingDistance: 45
+EpipolarDistance: 0
+FrustumNearPlaneDist: 0.1
+FrustumFarPlaneDist: 10000.0
+BundleAdjustmentActiveKeyframes: 10

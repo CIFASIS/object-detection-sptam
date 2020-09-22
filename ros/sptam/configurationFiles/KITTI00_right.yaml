@@ -1,0 +1,24 @@
+%YAML:1.0
+
+image_width: 1241
+image_height: 376
+camera_name: right_camera
+frame_id: stereo
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [ 7.188560000000e+02, 0, 6.071928000000e+02, 0, 7.188560000000e+02, 1.852157000000e+02, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [ 0, 0, 0, 0, 0 ]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [7.188560000000e+02, 0, 6.071928000000e+02, -386.1448, 0, 7.188560000000e+02, 1.852157000000e+02, 0, 0, 0, 1, 0]
+

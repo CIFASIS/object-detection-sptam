@@ -1,0 +1,100 @@
+%YAML:1.0
+
+RunConfiguration:
+  ParallelTrackingAndMapping: 'PTAM'
+  FeatureDetector: 'FAST'
+  DescriptorExtractor: 'BRIEF'
+  CameraCalibration: 'default'
+
+ParallelTrackingAndMapping:
+  PTAM:
+    MatchingCompCoefSecondBestVSFirst: 1.0
+    MatchingNeighborhood: 50
+    MatchingDistance:50
+    EpipolarDistance:2
+    FeatureDetectorImageMargin:100
+    MapPointCreationDistance:100
+    KeyFrameDistance:30.0
+    FramesBetweenKeyFrames: 20
+    FrustumNearPlaneDist: 0.1
+    FrustumFarPlaneDist: 50000
+    FrameRate: 15
+    IsSourceUndistorted: 0
+
+FeatureDetector:
+  STAR:
+    Type: 'STAR'
+    ResponseThreshold: 30
+  FAST:
+    Type: 'FAST'
+    Threshold: 30
+    NonmaxSuppression: 'true'
+  ORB:
+    Type: 'ORB'
+  SURF:
+    Type: 'SURF'
+  SIFT:
+    Type: 'SIFT'
+
+DescriptorExtractor:
+  BRIEF:
+    Type: 'BRIEF'
+    BytesLength: 32
+  ORB:
+    Type: 'ORB'
+  SURF:
+    Type: 'SURF'
+
+CameraCalibrationLeft:
+  default:
+    ImageWidth: 640
+    ImageHeight: 480
+    PixelSizeInX: 0.465
+    PixelSizeInY: 0.465
+    Intrinsic: !!opencv-matrix
+       rows: 3
+       cols: 3
+       dt: d
+       data: [ 660.4720, 0, 316.0923, 0, 660.4720, 214.2798, 0, 0, 1]
+    Distortion: !!opencv-matrix
+       rows: 5
+       cols: 1
+       dt: d
+       data: [ -0.2701, 0, -0.0001, 0, 0.1982]
+    Translation: !!opencv-matrix
+       rows: 3
+       cols: 1
+       dt: d
+       data: [0,0,0]
+    Rotation: !!opencv-matrix
+       rows: 3
+       cols: 3
+       dt: d
+       data: [1,0,0,0,1,0,0,0,1]
+
+CameraCalibrationRight:
+  default:
+    ImageWidth: 640
+    ImageHeight: 480
+    PixelSizeInX: 0.465
+    PixelSizeInY: 0.465
+    Intrinsic: !!opencv-matrix
+       rows: 3
+       cols: 3
+       dt: d
+       data: [ 664.7630, 0, 327.3481, 0, 664.7630, 245.3609, 0, 0, 1]
+    Distortion: !!opencv-matrix
+       rows: 5
+       cols: 1
+       dt: d
+       data: [ -0.2939, 0.1413, 0,  0.0018, 0]
+    Translation: !!opencv-matrix
+       rows: 3
+       cols: 1
+       dt: d
+       data: [ -180.8425, -0.6073, -4.4141 ]
+    Rotation: !!opencv-matrix
+       rows: 3
+       cols: 3
+       dt: d
+       data: [ 1, -0.0056, -0.0080, 0.0056, 1, -0.0018, 0.0080, 0.0018, 1]

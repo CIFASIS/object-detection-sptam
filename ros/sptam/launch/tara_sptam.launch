@@ -1,0 +1,49 @@
+<launch>
+
+  <!-- set the coordinate system for the IMU
+       camera: x: right, y: down, z: forward
+       imu:    x: forward, y: right, z: down
+       cam_to_imu = [0 1 0; 0 0 1; 1 0 0] -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="imu_broadcaster" args="0.3 0.0 0.0 -1.5707963267948966 -1.5707963267948966 0.0 left_camera imu" />
+
+  <!-- change the coordinate system ROS->SPTAM
+       ROS: x: forward, y:left, z: up
+       SPTAM: x: right, y: down, z: forward -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="baselink_broadcaster" args="0.5 0.3 0.0 -1.5707963267948966 0.0 -1.5707963267948966 base_link left_camera" />
+
+  <!-- Call stereo_image_proc to undistort and rectify images -->
+  <group ns="stereo">
+    <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc">
+<!--
+      <remap from="/stereo/left/image_raw"  to="/stereo/left/image_raw"/>
+      <remap from="/stereo/right/image_raw"  to="/stereo/right/image_raw"/>
+      <remap from="/stereo/left/camera_info"  to="/stereo/left/camera_info"/>
+      <remap from="/stereo/right/camera_info"  to="/stereo/right/camera_info"/>
+-->
+    </node>
+  </group>
+
+  <node pkg="sptam" type="sptam_node" name="sptam" output="screen" >
+
+    <rosparam command="load" file="$(find sptam)/configurationFiles/mobius.yaml" />
+
+    <param name="use_prediction" value="false" />
+    <param name="approximate_sync" value="false" />
+    <param name="publish_transform" value="true" />
+
+    <!--param name="prediction_frame" value="odom" /-->
+    <param name="base_frame" value="base_link" />
+    <param name="camera_frame" value="left_camera" />
+    <param name="map_frame" value="map" />
+    <param name="reference_frame" value="base_link" />
+
+  </node>
+
+  <!-- path publisher. Transforms poses into path. -->
+<!--
+  <node pkg="ros_utils" type="pose_to_path" name="sptam_path">
+    <remap from="pose" to="/sptam/robot/pose" />
+  </node>
+-->
+
+</launch>

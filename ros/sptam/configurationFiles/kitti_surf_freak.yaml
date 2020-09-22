@@ -1,0 +1,32 @@
+FeatureDetector:
+
+  Name: 'SURF'
+  hessianThreshold: 100
+  nOctaves: 8
+  nOctaveLayers: 7
+  extended: false
+  upright: false
+
+
+DescriptorExtractor:
+  Name: 'FREAK'
+  patternScale: 42.0
+  orientationNormalized: true
+  scaleNormalized: true
+  nOctaves: 8
+
+DescriptorMatcher:
+  # normType: use
+  #  - NORM_L1 or NORM_L2 for SIFT and SURF descriptors
+  #  - NORM_HAMMING for ORB, BRISK, and BRIEF
+  #  - NORM_HAMMING2 should be used with ORB when WTA_K==3 or 4
+  Name: 'BruteForce-Hamming'
+  crossCheck: false
+
+MatchingCellSize: 15
+MatchingNeighborhood: 1
+MatchingDistance: 125
+EpipolarDistance: 1
+FrustumNearPlaneDist: 0.1
+FrustumFarPlaneDist: 10000.0
+BundleAdjustmentActiveKeyframes: 10
