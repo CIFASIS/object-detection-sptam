@@ -4,9 +4,6 @@
 [submodule "ApproxMVBB"]
 	path = ApproxMVBB
 	url = https://github.com/CIFASIS/ApproxMVBB.git
-[submodule "opencv_contrib"]
-	path = opencv_contrib
-	url = https://github.com/CIFASIS/opencv_contrib.git
 [submodule "opencv"]
 	path = opencv
 	url = https://github.com/CIFASIS/opencv.git
