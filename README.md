@@ -51,22 +51,49 @@ This site and the code provided here are under active development. Even though w
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-## Install py-faster-rcnn and caffe-fast-rcnn
+# Install py-faster-rcnn and caffe-fast-rcnn
 
-Clone the Faster R-CNN repository
      
-     git submodule update --init --recursive 
+## py-faster-rcnn Dependencies
+### caffe-fast-rcnn
 
-and follow the installation instructions
+*Tested on Ubuntu 16.04*
 
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+
+### Blas
+
+sudo apt-get install libblas-dev liblapack-dev
+
+### ATLAS
+
+sudo apt-get install libatlas-base-dev
+
+### Compile and Install Caffe
+
+  cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
+  mkdir build
+  cd build
+  cmake ..
+  make -j4 && make pycaffe
+  make install
+
+### Compile py-faster-rcnn
+
+  cd ~/object-detection-sptam/py-faster-rcnn/lib
+  make
 
 
 ## Modified S-PTAM Dependencies
 
+   git submodule update --init --recursive 
+
 ### SuiteSparse
     
     sudo apt-get install libsuitesparse-dev
-sd
+
 
 ### g2o 
     
