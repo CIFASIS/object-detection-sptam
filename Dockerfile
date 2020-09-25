@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-kinetic-ros-base=1.3.2-0* 
    
+
 # RUN LINE BELOW TO REMOVE debconf ERRORS (MUST RUN BEFORE ANY apt-get CALLS)
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
