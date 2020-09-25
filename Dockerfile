@@ -15,8 +15,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-kinetic-ros-base=1.3.2-0* 
    
-# USE BASH
-#SHELL ["/bin/bash", "-c"]
 # RUN LINE BELOW TO REMOVE debconf ERRORS (MUST RUN BEFORE ANY apt-get CALLS)
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -35,7 +33,9 @@ RUN apt-get install  -y --no-install-recommends  \
     libgoogle-glog-dev \
     liblmdb-dev \
     ros-kinetic-pcl-ros \
-    wget
+    wget \
+    vim
+
 
 #Cuda 9
   
@@ -50,7 +50,7 @@ RUN dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
 RUN dpkg -i libnccl2_2.1.4-1+cuda9.0_amd64.deb
 RUN dpkg -i libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
 RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-RUN apt-get update && apt-get install -y  cuda=9.0.176-1 \
+RUN apt-get update && apt-get install  --no-install-recommends -y  cuda=9.0.176-1 \
     && apt-get install libcudnn7-dev \
     && apt-get install libnccl-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -74,19 +74,31 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     && pip install scipy==0.17.1 \
     && pip install PyWavelets==0.5.0 \
     && pip install networkx==1.9 \
-    && pip install matplotlib==2.0.1 \
+    && pip install six==1.2.0 \
+    && pip install matplotlib==1.5.0 \
     && pip install numpy==1.14.0 \
-    && pip install scikit-image==0.14.2 \
+    && pip install scikit-image==0.9.3 \
     && pip install Cython==0.19.2 \
     && pip install ipython==3.1.0 \
     && pip install nose==1.3.7 \
     && pip install pandas==0.13.0 \
     && pip install python-dateutil==1.5 \
     && pip install PyYAML==3.11 \
-    && pip install six==1.2.0
+    && pip install dask==0.12.0 \
+    && pip install google==1.9.3 \
+    && pip install protobuf==2.6.0
+ 
 RUN cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
-    && mkdir build && cd build &&  cmake .. &&  make && make pycaffe && make install
+    && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 .. &&  make && make pycaffe && make install
 RUN cd $HOME/object-detection-sptam/py-faster-rcnn/lib && make
+
+
+
+   #     cmake \
+   #     python-dev \
+   #     python-numpy \
+   #     python-setuptools \
+   #     python-scipy 
 
 #Install py-faster-rcnn and caffe
 RUN cd /usr/lib/python2.7/dist-packages \
@@ -159,6 +171,8 @@ RUN . /opt/ros/kinetic/setup.sh \
     && . devel/setup.sh
 
 COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  $HOME/object-detection-sptam/data/caffeModels/
-
 RUN  rm -rf /var/lib/apt/lists/* \
 CMD ["bash"]
+
+
+WORKDIR catkin_ws
