@@ -1,4 +1,4 @@
-#include <math_functions.h>  // CUDA's, not caffe's, for fabs, signbit
+//#include <math_functions.h>  // CUDA's, not caffe's, for fabs, signbit
 #include <cuda_runtime.h>
 #include <cuda_runtime_api.h>
 
