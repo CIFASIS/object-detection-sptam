@@ -147,7 +147,11 @@ RUN cd /usr/lib/python2.7/dist-packages \
 
 
 #sptam dependencies
-RUN apt-get update && apt-get install libsuitesparse-dev -y
+RUN apt-get update && apt-get install libsuitesparse-dev -y \
+    libtbb-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
+
 
 #build and install g2o
 RUN cd $HOME/object-detection-sptam/g2o \
@@ -172,11 +176,10 @@ RUN cd $HOME/object-detection-sptam/ApproxMVBB \
     &&  cmake .. \
     &&  make all && make install \
     && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/include /usr/include/ \
-    && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/lib/* /usr/lib/ \
-    && rm -rf $HOME/object-detection-sptam/ApproxMVBB/build/*
+    && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/lib/* /usr/lib/ 
+ 
 
-
-RUN apt-get install python-catkin-tools -y \
+RUN apt-get update && apt-get install python-catkin-tools -y \
     ros-kinetic-tf2-geometry-msgs \
     ros-kinetic-cv-bridge \
     ros-kinetic-image-geometry \    
