@@ -49,9 +49,6 @@ If you use *object-detection-sptam* in an academic work, please cite:
 # Disclaimer
 This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
 
-# Dependencies
-
-Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
 # Requirements
  ### Hardware
@@ -63,7 +60,11 @@ Move the content of ros directory (ros nodes and the network model that is used 
     * cuda-8, cuda-9 or cuda-10
     * cudnn5,cudnn6 or cudnn7
 
-     
+
+# Dependencies
+
+Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
+
 ## py-faster-rcnn Dependencies
 ### caffe-fast-rcnn
 
@@ -156,7 +157,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
     make all
     sudo make install
 
-# Compilation
+# Sptam Compilation
 
     catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON
     
