@@ -115,23 +115,20 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
 RUN cd $HOME && git clone https://github.com/CIFASIS/object-detection-sptam.git \
     && cd $HOME/object-detection-sptam \
     && git checkout clean-the-code-kinetic \
-    && git pull \
-    && git submodule update --init --recursive 
+    && git pull 
+RUN  cd $HOME/object-detection-sptam &&  git submodule update --init --recursive 
 
 
 
 ENV NVIDIA_VISIBLE_DEVICES=0
 RUN mkdir -p temp
 COPY ./py-faster-rcnn/caffe-fast-rcnn/Makefile.config temp/
-COPY ./py-faster-rcnn/caffe-fast-rcnn/cmake/Cuda.cmake temp/
 RUN cp temp/Makefile.config $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/  \
-    && cp temp/Cuda.cmake $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/cmake/ \
     && cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
-    && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 .. &&  make && make pycaffe && make install
-COPY ./py-faster-rcnn/lib/setup.py temp/
-RUN cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/ \
+    && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 .. &&  make && make pycaffe && make install \
     && cd $HOME/object-detection-sptam/py-faster-rcnn/lib \
-    && make
+    && make \
+    && rm -rf /temp
 
 #Install py-faster-rcnn and caffe
 RUN cd /usr/lib/python2.7/dist-packages \
@@ -197,7 +194,8 @@ RUN . /opt/ros/kinetic/setup.sh \
     && mkdir -p catkin_ws/src \
     && cd catkin_ws \
     && rosdep update \
-    && rosdep install -y -r --from-paths src --ignore-src --rosdistro=kinetic -y 
+    && rosdep install -y -r --from-paths src --ignore-src --rosdistro=kinetic -y  \
+    && rm -rf /var/lib/apt/lists/* 
     
 
 #Build workspace and sptam
@@ -212,10 +210,8 @@ RUN . /opt/ros/kinetic/setup.sh \
     && catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON 
 
 #copy caffemodel file
-COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  temp 
-RUN cp temp/pose_coco_Allconst_iter16000.caffemodel $HOME/object-detection-sptam/data/caffeModels/
-RUN rm -rf /var/lib/apt/lists/* \
-RUN rm -rf /temp
+#COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  temp 
+#RUN cp temp/pose_coco_Allconst_iter16000.caffemodel $HOME/object-detection-sptam/data/caffeModels/
 
 #copy models
 
