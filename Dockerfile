@@ -9,12 +9,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-rosdep \
     python-rosinstall \
     python-vcstools \
+    ros-kinetic-ros-base=1.3.2-0* \
     && rm -rf /var/lib/apt/lists/*
-
-
-# install ros packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-kinetic-ros-base=1.3.2-0* 
+    
    
 
 # RUN LINE BELOW TO REMOVE debconf ERRORS (MUST RUN BEFORE ANY apt-get CALLS)
@@ -35,8 +32,7 @@ RUN apt-get install  -y --no-install-recommends  \
     libgoogle-glog-dev \
     liblmdb-dev \
     ros-kinetic-pcl-ros \
-    wget \
-    vim
+    && rm -rf /var/lib/apt/lists/*
 
 
 #Install Cuda 10, cudnn7 and nccl 2
@@ -121,17 +117,18 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     && pip install dask==0.12.0 \
     && pip install google==1.9.3 \
     && pip install protobuf==2.6.0
+
 ENV NVIDIA_VISIBLE_DEVICES=0
 RUN mkdir -p temp
 COPY ./py-faster-rcnn/caffe-fast-rcnn/Makefile.config temp/
 COPY ./py-faster-rcnn/caffe-fast-rcnn/cmake/Cuda.cmake temp/
-RUN cp temp/Makefile.config $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/
-RUN cp temp/Cuda.cmake $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/cmake/
-RUN cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
+RUN cp temp/Makefile.config $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/  \
+    && cp temp/Cuda.cmake $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/cmake/ \
+    && cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
     && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 .. &&  make && make pycaffe && make install
 COPY ./py-faster-rcnn/lib/setup.py temp/
-RUN cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/
-RUN cd $HOME/object-detection-sptam/py-faster-rcnn/lib \
+RUN cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/ \
+    && cd $HOME/object-detection-sptam/py-faster-rcnn/lib \
     && make
 
 #Install py-faster-rcnn and caffe
@@ -154,7 +151,8 @@ RUN apt-get update && apt-get install libsuitesparse-dev -y
 RUN cd $HOME/object-detection-sptam/g2o \
     && mkdir -p build && cd build \
     && cmake ..  \
-    && make && make install 
+    && make && make install \
+    && rm -rf $HOME/object-detection-sptam/g2o/build/*
 
 #install meta
 RUN cp -Rf $HOME/object-detection-sptam/dependencies/meta/include/meta /usr/include/
@@ -171,7 +169,8 @@ RUN cd $HOME/object-detection-sptam/ApproxMVBB \
     &&  cmake .. \
     &&  make all && make install \
     && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/include /usr/include/ \
-    && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/lib/* /usr/lib/
+    && cp -Rf $HOME/object-detection-sptam/ApproxMVBB/build/install/lib/* /usr/lib/ \
+    && rm -rf $HOME/object-detection-sptam/ApproxMVBB/build/*
 
 
 RUN apt-get install python-catkin-tools -y \
@@ -182,7 +181,9 @@ RUN apt-get install python-catkin-tools -y \
     qt5-default \
     libqt5opengl5-dev \
     libqglviewer-dev \
-    ros-kinetic-stereo-image-proc
+    ros-kinetic-stereo-image-proc \
+    && rm -rf /var/lib/apt/lists/*
+    
    
 
 #Create catkin worksapce
@@ -207,7 +208,7 @@ RUN . /opt/ros/kinetic/setup.sh \
 #copy caffemodel file
 COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  temp 
 RUN cp temp/pose_coco_Allconst_iter16000.caffemodel $HOME/object-detection-sptam/data/caffeModels/
-RUN  rm -rf /var/lib/apt/lists/* \
+RUN rm -rf /var/lib/apt/lists/* \
 RUN rm -rf /temp
 
 #copy models
