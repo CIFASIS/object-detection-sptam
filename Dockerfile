@@ -1,3 +1,4 @@
+#FROM nvidia/cuda:10.2-base
 FROM ros:kinetic-ros-base-xenial
 
 MAINTAINER Erica Vidal "ericavidal@gmail.com"
@@ -38,25 +39,57 @@ RUN apt-get install  -y --no-install-recommends  \
     vim
 
 
-#Cuda 9
-  
-RUN wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
-RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
-RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnccl2_2.1.4-1+cuda9.0_amd64.deb
-RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
-RUN dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-RUN dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
-RUN dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
-RUN dpkg -i libnccl2_2.1.4-1+cuda9.0_amd64.deb
-RUN dpkg -i libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
-RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-RUN apt-get update && apt-get install  --no-install-recommends -y  cuda=9.0.176-1 \
-    && apt-get install libcudnn7-dev \
-    && apt-get install libnccl-dev \
+#Install Cuda 10, cudnn7 and nccl 2
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates apt-transport-https gnupg-curl && \
+    NVIDIA_GPGKEY_SUM=d1be581509378368edeec8c1eb2958702feedf3bc3d17011adbf24efacce4ab5 && \
+    NVIDIA_GPGKEY_FPR=ae09fe4bbd223a84b2ccfce3f60f4b3d7fa2af80 && \
+    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
+    apt-key adv --export --no-emit-version -a $NVIDIA_GPGKEY_FPR | tail -n +5 > cudasign.pub && \
+    echo "$NVIDIA_GPGKEY_SUM  cudasign.pub" | sha256sum -c --strict - && rm cudasign.pub && \
+    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
+    echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list && \
+    apt-get purge --auto-remove -y gnupg-curl \
     && rm -rf /var/lib/apt/lists/*
 
-# clone the code
+
+
+ENV CUDA_VERSION 10.2.89
+ENV CUDA_PKG_VERSION 10-2=$CUDA_VERSION-1
+ENV NCCL_VERSION 2.7.8
+ENV CUDNN_VERSION 7.6.5.32
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cuda-cudart-$CUDA_PKG_VERSION \
+    cuda-compat-10-2 \
+    cuda-nvtx-$CUDA_PKG_VERSION \
+    cuda-nvml-dev-$CUDA_PKG_VERSION \
+    cuda-command-line-tools-$CUDA_PKG_VERSION \
+    cuda-nvprof-$CUDA_PKG_VERSION \
+    cuda-libraries-$CUDA_PKG_VERSION \
+    cuda-npp-$CUDA_PKG_VERSION \
+    cuda-npp-dev-$CUDA_PKG_VERSION \
+    cuda-libraries-dev-$CUDA_PKG_VERSION \
+    cuda-minimal-build-$CUDA_PKG_VERSION \
+    libcublas10=10.2.2.89-1 \
+    libcublas-dev=10.2.2.89-1 \
+    libnccl2=$NCCL_VERSION-1+cuda10.2 \
+    libnccl-dev=2.7.8-1+cuda10.2 \
+    libcudnn7=$CUDNN_VERSION-1+cuda10.2 \
+    libcudnn7-dev=$CUDNN_VERSION-1+cuda10.2 \
+    && ln -s cuda-10.2 /usr/local/cuda \
+    && apt-mark hold libcudnn7 \ 
+    && apt-mark hold libnccl2 \
+    && rm -rf /var/lib/apt/lists/*
+
+ 
+ENV CUDA_HOME=/usr/local/cuda-10.2
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:/usr/local/cuda/lib64/stubs 
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+
+
+# clone object-detection-sptam code
 RUN cd $HOME && git clone https://github.com/CIFASIS/object-detection-sptam.git \
     && cd $HOME/object-detection-sptam \
     && git checkout clean-the-code-kinetic \
@@ -78,8 +111,8 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     && pip install six==1.2.0 \
     && pip install matplotlib==1.5.0 \
     && pip install numpy==1.14.0 \
-    && pip install scikit-image==0.9.3 \
     && pip install Cython==0.19.2 \
+    && pip install scikit-image==0.9.3 \
     && pip install ipython==3.1.0 \
     && pip install nose==1.3.7 \
     && pip install pandas==0.13.0 \
@@ -88,18 +121,18 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     && pip install dask==0.12.0 \
     && pip install google==1.9.3 \
     && pip install protobuf==2.6.0
- 
+ENV NVIDIA_VISIBLE_DEVICES=0
+RUN mkdir -p temp
+COPY ./py-faster-rcnn/caffe-fast-rcnn/Makefile.config temp/
+COPY ./py-faster-rcnn/caffe-fast-rcnn/cmake/Cuda.cmake temp/
+RUN cp temp/Makefile.config $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/
+RUN cp temp/Cuda.cmake $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/cmake/
 RUN cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
-    && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 .. &&  make && make pycaffe && make install
-RUN cd $HOME/object-detection-sptam/py-faster-rcnn/lib && make
-
-
-
-   #     cmake \
-   #     python-dev \
-   #     python-numpy \
-   #     python-setuptools \
-   #     python-scipy 
+    && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 .. &&  make && make pycaffe && make install
+COPY ./py-faster-rcnn/lib/setup.py temp/
+RUN cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/
+RUN cd $HOME/object-detection-sptam/py-faster-rcnn/lib \
+    && make
 
 #Install py-faster-rcnn and caffe
 RUN cd /usr/lib/python2.7/dist-packages \
@@ -148,10 +181,11 @@ RUN apt-get install python-catkin-tools -y \
     ros-kinetic-image-transport \
     qt5-default \
     libqt5opengl5-dev \
-    libqglviewer-dev 
+    libqglviewer-dev \
+    ros-kinetic-stereo-image-proc
    
 
-#Create actkin worksapce
+#Create catkin worksapce
 RUN . /opt/ros/kinetic/setup.sh \
     && mkdir -p catkin_ws/src \
     && cd catkin_ws \
@@ -168,12 +202,24 @@ RUN . /opt/ros/kinetic/setup.sh \
     && ln -s $HOME/object-detection-sptam/ros/dl_node dl_node \
     && cd .. \
     && catkin build ros_utils \
-    && catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON \
-    && . devel/setup.sh
+    && catkin build sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON 
 
-COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  $HOME/object-detection-sptam/data/caffeModels/
+#copy caffemodel file
+COPY ./data/caffeModels/pose_coco_Allconst_iter16000.caffemodel  temp 
+RUN cp temp/pose_coco_Allconst_iter16000.caffemodel $HOME/object-detection-sptam/data/caffeModels/
 RUN  rm -rf /var/lib/apt/lists/* \
-CMD ["bash"]
+RUN rm -rf /temp
 
+#copy models
+
+
+RUN mkdir -p /usr/lib/python2.7/models/modelpose/VGG16/faster_rcnn_end2end
+RUN cp $HOME/object-detection-sptam/models_trained/modelpose/VGG16/faster_rcnn_end2end/test.final.prototxt /usr/lib/python2.7/models/modelpose/VGG16/faster_rcnn_end2end
+RUN mkdir -p /usr/lib/python2.7/models/pascal_voc
+RUN cd /usr/lib/python2.7/models/pascal_voc \
+    && ln -s /usr/lib/python2.7/models/modelpose modelpose
+
+
+CMD ["bash"]
 
 WORKDIR catkin_ws
