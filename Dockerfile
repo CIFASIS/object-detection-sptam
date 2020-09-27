@@ -84,14 +84,6 @@ ENV CUDA_HOME=/usr/local/cuda-10.2
 ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:/usr/local/cuda/lib64/stubs 
 ENV PATH=${CUDA_HOME}/bin:${PATH}
 
-
-# clone object-detection-sptam code
-RUN cd $HOME && git clone https://github.com/CIFASIS/object-detection-sptam.git \
-    && cd $HOME/object-detection-sptam \
-    && git checkout clean-the-code-kinetic \
-    && git pull \
-    && git submodule update --init --recursive 
-
 #caffe & py-faster-rcnn
 RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     python-opencv  \
@@ -117,6 +109,16 @@ RUN apt-get update && apt-get install  -y --no-install-recommends python-pip \
     && pip install dask==0.12.0 \
     && pip install google==1.9.3 \
     && pip install protobuf==2.6.0
+
+
+# clone object-detection-sptam code
+RUN cd $HOME && git clone https://github.com/CIFASIS/object-detection-sptam.git \
+    && cd $HOME/object-detection-sptam \
+    && git checkout clean-the-code-kinetic \
+    && git pull \
+    && git submodule update --init --recursive 
+
+
 
 ENV NVIDIA_VISIBLE_DEVICES=0
 RUN mkdir -p temp
@@ -161,7 +163,8 @@ RUN cp -Rf $HOME/object-detection-sptam/dependencies/meta/include/meta /usr/incl
 RUN cd $HOME/object-detection-sptam/dependencies/pugixml \
     &&  mkdir build && cd build \
     &&  cmake .. \
-    &&  make && make install/local
+    &&  make && make install/local \
+    && rm -rf $HOME/object-detection-sptam/dependencies/pugixml/build/*
 
 #Build and install ApproxMVBB
 RUN cd $HOME/object-detection-sptam/ApproxMVBB \
