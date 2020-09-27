@@ -215,3 +215,7 @@ We can launch other terminal to conect to the container with the next command:
 For play rosbags from the host into the container we can mount the folder that contains the rosbags file with --volume argument:
 
     sudo docker run --volume=<PATH-TO-ROSBAGS-IN-THE-HOST>:/rosbags -it  --rm --gpus all object-detection-sptam:kinetic bash
+
+And we need the caffemodel file: 
+
+docker run --volume=<PATH-TO-ROSBAGS-IN-THE-HOST>:/rosbags --volume=<PATH-TO-CAFFEMODEL>:/root/object-detection-sptam/data/caffeModel -it  --rm --gpus all object-detection-sptam:kinetic bash
