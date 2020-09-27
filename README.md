@@ -121,9 +121,9 @@ Move the content of ros directory (ros nodes and the network model that is used 
 
     git submodule update --init --recursive 
 
-### SuiteSparse
+### Install SuiteSparse, opencv3, intel tbb library, ros pcl package 
     
-    sudo apt-get install libsuitesparse-dev
+    sudo apt-get install libsuitesparse-dev  python-opencv  ros-kinetic-opencv3  libtbb-dev  ros-kinetic-pcl-ros
 
 
 ### g2o 
