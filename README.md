@@ -13,6 +13,7 @@ Journal of Intelligent & Robotic Systems, 2019.
 ## Table of Contents
 - [License](#license)
 - [Disclaimer](#disclaimer)
+- [System requirements](#requirements)
 - [Dependencies](#dependencies)
 - [Compilation](#compilation)
 - [Run](#run)
@@ -52,13 +53,19 @@ This site and the code provided here are under active development. Even though w
 
 Move the content of ros directory (ros nodes and the network model that is used in rcnn_pose.py) to your ros workspace. Then compile the ros workspace.
 
-# Install py-faster-rcnn and caffe-fast-rcnn
+#Requirements
+ ### Hardware
+    * Nvidia GPU Graphic card 
+ ### System 
+    * Ubuntu 16.04
+    * ros-kinectic
+    * Nvidia drivers
+    * cuda-8, cuda-9 or cuda-10
+    * cudnn5,cudnn6 or cudnn7
 
      
 ## py-faster-rcnn Dependencies
 ### caffe-fast-rcnn
-
-*Tested on Ubuntu 16.04*
 
     sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
     sudo apt-get install --no-install-recommends libboost-all-dev
@@ -71,6 +78,29 @@ Move the content of ros directory (ros nodes and the network model that is used 
 ### ATLAS
 
     sudo apt-get install libatlas-base-dev
+    
+### Python packages
+
+    pip install wheel  
+    pip install easydict==1.9 
+    pip install setuptools 
+    pip install Pillow==5.0.0 
+    pip install scipy==0.17.1 
+    pip install PyWavelets==0.5.0 
+    pip install networkx==1.9 
+    pip install six==1.2.0 
+    pip install matplotlib==1.5.0 
+    pip install numpy==1.14.0 
+    pip install Cython==0.19.2 
+    pip install scikit-image==0.9.3 
+    pip install ipython==3.1.0 
+    pip install nose==1.3.7 
+    pip install pandas==0.13.0 
+    pip install python-dateutil==1.5 
+    pip install PyYAML==3.11 
+    pip install dask==0.12.0 
+    pip install google==1.9.3 
+    pip install protobuf==2.6.0
 
 ### Compile and Install Caffe
 
