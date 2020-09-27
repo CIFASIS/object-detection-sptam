@@ -60,36 +60,36 @@ Move the content of ros directory (ros nodes and the network model that is used 
 
 *Tested on Ubuntu 16.04*
 
-sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
-sudo apt-get install --no-install-recommends libboost-all-dev
-sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+    sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+    sudo apt-get install --no-install-recommends libboost-all-dev
+    sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
 
 ### Blas
 
-sudo apt-get install libblas-dev liblapack-dev
+    sudo apt-get install libblas-dev liblapack-dev
 
 ### ATLAS
 
-sudo apt-get install libatlas-base-dev
+    sudo apt-get install libatlas-base-dev
 
 ### Compile and Install Caffe
 
-  cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
-  mkdir build
-  cd build
-  cmake ..
-  make -j4 && make pycaffe
-  make install
+    cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
+    mkdir build
+    cd build
+    cmake ..
+    make -j4 && make pycaffe
+    make install
 
 ### Compile py-faster-rcnn
 
-  cd ~/object-detection-sptam/py-faster-rcnn/lib
-  make
+    cd ~/object-detection-sptam/py-faster-rcnn/lib
+    make
 
 
 ## Modified S-PTAM Dependencies
 
-   git submodule update --init --recursive 
+    git submodule update --init --recursive 
 
 ### SuiteSparse
     
@@ -148,24 +148,24 @@ copy or moved to python directory:
 
 # Docker
 
-## Build image from Dockerfile
+### Build image from Dockerfile
 
-### 0) Install [nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
-### 1) clone object-detection-sptam 
+#### 0) Install [nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
+#### 1) clone object-detection-sptam 
     
     git clone https://github.com/CIFASIS/object-detection-sptam.git 
     git checkout clean-the-code-kinetic
     git pull
-### 2) Download the caffemodel file
+#### 2) Download the caffemodel file
     cd object-detection-sptam
     source data/caffeModels/getCaffeModel.sh
 
-### 3) Build docker image: 
+#### 3) Build docker image: 
     
     sudo docker build -t "object-detection-sptam:kinetic" .   
 
 
-## Run docker
+### Run
 
 The resulting image can be seen with the docker images command.
 
