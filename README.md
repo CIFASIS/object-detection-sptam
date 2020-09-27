@@ -154,7 +154,8 @@ copy or moved to python directory:
 ### 1) clone object-detection-sptam 
     
     git clone https://github.com/CIFASIS/object-detection-sptam.git 
-
+    git checkout clean-the-code-kinetic
+    git pull
 ### 2) Download the caffemodel file
     cd object-detection-sptam
     source data/caffeModels/getCaffeModel.sh
@@ -162,7 +163,7 @@ copy or moved to python directory:
 ### 3) Build docker image: 
     
     sudo docker build -t "object-detection-sptam:kinetic" .   
-    
+
 
 ## Run docker
 
