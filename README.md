@@ -16,6 +16,7 @@ Journal of Intelligent & Robotic Systems, 2019.
 - [Dependencies](#dependencies)
 - [Compilation](#compilation)
 - [Run](#run)
+- [Docker](#docker)
 
 # License
 
@@ -145,3 +146,40 @@ copy or moved to python directory:
 
     cp -Rf /data/object-detection-sptam/models_trained/* ~/.local/lib/python2.7/models/
 
+# Docker
+
+## Build image from Dockerfile
+
+### 0) Install [nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
+### 1) clone object-detection-sptam 
+    
+    git clone https://github.com/CIFASIS/object-detection-sptam.git 
+
+### 2) Download the caffemodel file
+    cd object-detection-sptam
+    source data/caffeModels/getCaffeModel.sh
+
+### 3) Build docker image: 
+    
+    sudo docker build -t "object-detection-sptam:kinetic" .   
+    
+
+## Run docker
+
+The resulting image can be seen with the docker images command.
+
+    docker images 
+
+Once the image is built, we can launch the container with the docker run command.
+
+    docker run -it --name sptam_container --rm --gpus all object-detection-sptam:kinetic bash
+
+This starts an interactive bash shell in the container once it is initialized.
+
+We can launch other terminal to conect to the container with the next command:
+
+    docker container exec -it sptam_container bash
+
+For play rosbags from the host into the container we can mount the folder that contains the rosbags file with --volume argument:
+
+    sudo docker run --volume=<PATH-TO-ROSBAGS-IN-THE-HOST>:/rosbags -it  --rm --gpus all object-detection-sptam:kinetic bash
