@@ -1,7 +1,7 @@
 #FROM nvidia/cuda:10.2-base
 FROM ros:kinetic-ros-base-xenial
 
-MAINTAINER Erica Vidal "ericavidal@gmail.com"
+LABEL maintainer="Erica Vidal ericavidal@gmail.com"
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
