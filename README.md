@@ -233,3 +233,11 @@ For play rosbags from the host into the container we can mount the folder that c
 And we need the caffemodel file to, so we can mount the path where is the file pose_coco_Allconst_iter16000.caffemodel: 
 
     docker run --volume=<PATH-TO-ROSBAGS-IN-THE-HOST>:/rosbags --volume=<PATH-TO-CAFFEMODEL>:/root/object-detection-sptam/data/caffeModel -it  --rm --gpus all object-detection-sptam:kinetic bash
+    
+### Pull image from dockerhub    
+
+The next image is for Quadro M6000 , GeForce 900, GTX-970, GTX-980, GTX Titan X. 
+
+    docker pull eevidal/object-detection-sptam-kinetic:ros-base-xenial-sptam-kinetic-maxwell
+      
+
