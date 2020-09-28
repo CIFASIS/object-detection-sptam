@@ -116,7 +116,7 @@ Move the content of ros directory (ros nodes and the network model that is used 
 
     cd ~/object-detection-sptam/py-faster-rcnn/lib
 
-Edit setup.py and set apropiate sm arch code for you GPU [see]:( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
+Edit setup.py and set appropiate sm arch code for your GPU [see]( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
 
      make
 
@@ -200,7 +200,7 @@ copy or moved to python directory:
     cp Makefile.config.example Makefile.config 
 Edit the Makefile.config file and set the vars. 
     
-Edit setup.py and set apropiate sm arch code for you GPU [see]:( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
+Edit setup.py and set appropiate sm arch code for your GPU [see]( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
     
     cd ~/object-detection-sptam/py-faster-rcnn/lib
 
