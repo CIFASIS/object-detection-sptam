@@ -125,7 +125,7 @@ RUN mkdir -p temp
 COPY ./py-faster-rcnn/caffe-fast-rcnn/Makefile.config temp/
 COPY ./py-faster-rcnn/lib/setup.py temp/
 RUN cp temp/Makefile.config $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/  \
-    cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/ \
+    && cp temp/setup.py $HOME/object-detection-sptam/py-faster-rcnn/lib/ \
     && cd $HOME/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn \
     && mkdir build && cd build &&  cmake -DUSE_CUDNN=1 .. &&  make && make pycaffe && make install \
     && cd $HOME/object-detection-sptam/py-faster-rcnn/lib \
