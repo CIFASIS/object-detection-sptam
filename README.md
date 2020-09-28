@@ -104,8 +104,8 @@ Move the content of ros directory (ros nodes and the network model that is used 
     pip install protobuf==2.6.0
 
 ### Compile and Install Caffe
-
-    cp Makefile.config.example Makefile.config (revisar el Makefile.config y setear las variables necesarias) 
+    cd ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn
+    cp Makefile.config.example Makefile.config (edit the Makefile.config file and set the vars) 
     mkdir build
     cd build
     cmake ..
@@ -187,11 +187,16 @@ copy or moved to python directory:
     git clone https://github.com/CIFASIS/object-detection-sptam.git 
     git checkout clean-the-code-kinetic
     git pull
+
 #### 2) Download the caffemodel file
     cd object-detection-sptam
     source data/caffeModels/getCaffeModel.sh
 
-#### 3) Build docker image: 
+#### 3) Edit  Makefile.config of caffe
+    cd ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn
+    cp Makefile.config.example Makefile.config (edit the Makefile.config file and set the vars) 
+
+#### 4) Build docker image: 
     
     sudo docker build -t "object-detection-sptam:kinetic" .   
 
