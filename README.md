@@ -237,8 +237,12 @@ And we need the caffemodel file to, so we can mount the path where is the file p
   
 ## Pull image from dockerhub    
 
-This image is for Quadro M6000 , GeForce 900, GTX-970, GTX-980 or GTX Titan X cards only. 
+For Quadro M6000 , GeForce 900, GTX-970, GTX-980 or GTX Titan X cards only. 
 
     docker pull eevidal/object-detection-sptam-kinetic:ros-base-xenial-sptam-kinetic-maxwell
-      
+    
+For GTX 1080, GTX 1070, GTX 1060, GTX 1050, GTX 1030, Titan Xp, Tesla P40, Tesla P4, Discrete GPU on the NVIDIA Drive PX2
 
+    docker pull eevidal/object-detection-sptam-kinetic:ros-base-xenial
+      
+For other GPUs use FromMaxwellToOther.dockerfile to create your own 
