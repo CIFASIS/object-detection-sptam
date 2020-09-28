@@ -115,7 +115,10 @@ Move the content of ros directory (ros nodes and the network model that is used 
 ### Compile py-faster-rcnn
 
     cd ~/object-detection-sptam/py-faster-rcnn/lib
-    make
+
+Edit setup.py and set apropiate sm arch code for you GPU [see]:( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
+
+     make
 
 
 ## Modified S-PTAM Dependencies
@@ -192,9 +195,15 @@ copy or moved to python directory:
     cd object-detection-sptam
     source data/caffeModels/getCaffeModel.sh
 
-#### 3) Edit  Makefile.config of caffe
+#### 3) Edit  Makefile.config of caffe and setup.py of 
     cd ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn
-    cp Makefile.config.example Makefile.config (edit the Makefile.config file and set the vars) 
+    cp Makefile.config.example Makefile.config 
+Edit the Makefile.config file and set the vars. 
+    
+Edit setup.py and set apropiate sm arch code for you GPU [see]:( https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/ )
+    
+    cd ~/object-detection-sptam/py-faster-rcnn/lib
+
 
 #### 4) Build docker image: 
     
