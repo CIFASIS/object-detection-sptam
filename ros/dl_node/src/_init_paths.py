@@ -18,12 +18,12 @@ def add_path(path):
 
 # Add caffe to PYTHONPATH
 ## Hardcoded
-caffe_path = osp.join('/','home','javier','rcnn','py-faster-rcnn' ,'caffe-fast-rcnn', 'python')
+caffe_path = osp.join('/','usr','local','python', 'caffe')
 add_path(caffe_path)
 
 # Add lib to PYTHONPATH
 ## Hardcoded
-lib_path = osp.join('/','home','javier','rcnn','py-faster-rcnn','lib')
+lib_path = osp.join('/','usr','local','lib')
 add_path(lib_path)
 
 #tools_path = osp.join('/','home','javier','rcnn','py-faster-rcnn' ,'tools')

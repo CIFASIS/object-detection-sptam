@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn
+CMAKE_SOURCE_DIR = ~/ondeloc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = ~/object-detection-sptam/py-faster-rcnn/caffe-fast-rcnn/build
+CMAKE_BINARY_DIR = ~/ondeloc
 
 #=============================================================================
 # Targets provided globally by CMake.

@@ -15,14 +15,13 @@ See README.md for installation instructions before running.
 import _init_paths
 
 from fast_rcnn.config import cfg
+
 from fast_rcnn.test import im_detect
 from fast_rcnn.nms_wrapper import nms
 
 from utils.timer import Timer
-## esto es por si da este error por no tener X
-## https://stackoverflow.com/questions/37604289/tkinter-tclerror-no-display-name-and-no-display-environment-variable 
-import matplotlib
-matplotlib.use('Agg')
+
+#matplotlib.use('Agg')
 ####
 import matplotlib.pyplot as plt
 import numpy as np
@@ -41,11 +40,8 @@ CLASSES = ('__background__',
            'dresser', 'monitor', 'night_stand', 'sofa', 'table',
            'toilet')
 
-##NETS = {'vgg16':('VGG16','pose_cls_15k_40kcls_pose__iter_230000.caffemodel')}
 NETS= {'vgg16':('VGG16',"pose_cls_15k_40kcls_230kopose_p+c+r_iter_200000.caffemodel")} ##best
-##NETS ={'vgg16':('VGG16','pose_cls_15k_0kcls_pose_170000_resume_iter_60000.caffemodel')}
-##NETS = {'vgg16': ('VGG16','pose_cls_2_onlypose__iter_130000.caffemodel')} 
-##NETS = {'vgg16' : ('VGG16','pose_cls_15k_15kcls_pose__iter_230000.caffemodel')}
+
 
 FOLDER = 'abspath'
 
@@ -76,17 +72,18 @@ cpu_mode = False
 gpu_id = 0
 #
 
+
+
+
 prototxt = os.path.join(cfg.MODELS_DIR, 'modelpose', NETS[demo_net][0],
                             'faster_rcnn_end2end', 'test.final.prototxt')
 if FOLDER == 'data':
    caffemodel = os.path.join(cfg.DATA_DIR, 'faster_rcnn_models',
                                  NETS[demo_net][1])
-elif FOLDER == 'partition1':
-   caffemodel = os.path.join('/home/taihu/output/faster_rcnn_end2end/train',NETS[demo_net][1])
 
 elif FOLDER == 'abspath':
 
-   caffemodel = '/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
+   caffemodel = '../object-detection-sptam/data/caffeModels/pose_coco_Allconst_iter16000.caffemodel'
 
 else:
    caffemodel = os.path.join(cfg.ROOT_DIR, 'output','faster_rcnn_end2end','train',
@@ -129,7 +126,7 @@ def demo(im):
     ## Uncomment for time info
     #timer = Timer()
     #timer.tic()
-    scores, boxes = im_detect(NET, im, None)
+    scores, boxes = im_detect(NET, im)
     #timer.toc()
     #print ('Detection took {:.3f}s for '
     #       '{:d} object proposals').format(timer.total_time, boxes.shape[0])

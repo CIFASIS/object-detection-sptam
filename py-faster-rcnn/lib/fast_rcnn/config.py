@@ -154,7 +154,7 @@ __C.TEST.BBOX_REG = True
 __C.TEST.HAS_POSE=False
 
 # Propose boxes
-__C.TEST.HAS_RPN = False
+__C.TEST.HAS_RPN = True
 
 # Test using these proposals
 __C.TEST.PROPOSAL_METHOD = 'selective_search'
@@ -213,7 +213,7 @@ __C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..', '..'))
 __C.DATA_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
 
 # Model directory
-__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models'))
+__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models', 'pascal_voc'))
 
 # Name (or path to) the matlab executable
 __C.MATLAB = 'matlab'
