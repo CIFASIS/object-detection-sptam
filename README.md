@@ -1,9 +1,6 @@
 *object-detection-sptam* is a SLAM system for stereo cameras which builds a map of objects in a scene. The system is based on the SLAM method S-PTAM and an object detection module. The object detection module uses Deep Learning to perform online detection and provide the 3d pose estimations of objects present in an input image, while S-PTAM estimates the camera pose in real time.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=SgUq-DN0By0
-" target="_blank"><img src="http://img.youtube.com/vi/SgUq-DN0By0/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="560" height="315" border="0" /></a>  
-(Click the image to redirect to object-detection-sptam video)
+[![](https://markdown-videos.deta.dev/youtube/SgUq-DN0By0)](https://youtu.be/SgUq-DN0By0)
 
 ## Related Publications:
 [1]  Taihú Pire, Javier Corti and Guillermo Grinblat.
